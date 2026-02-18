@@ -50,34 +50,48 @@ navLinks?.querySelectorAll('a').forEach(a => {
   });
 });
 
-// ── 打字機效果（hero eyebrow） ───────────────
+// ── 打字機效果（循環） ───────────────────────
 function typewriter(el, text, speed = 70) {
   el.textContent = '';
   let i = 0;
-  const tick = () => {
+  const type = () => {
     el.textContent += text[i++];
-    if (i < text.length) setTimeout(tick, speed);
+    if (i < text.length) {
+      setTimeout(type, speed);
+    } else {
+      // 停頓後清空再重打
+      setTimeout(() => typewriter(el, text, speed), 2200);
+    }
   };
-  setTimeout(tick, 600);
+  setTimeout(type, 600);
 }
 const eyebrow = document.getElementById('eyebrow');
-if (eyebrow) typewriter(eyebrow, 'Dream Don\'t Come or Go');
+if (eyebrow) typewriter(eyebrow, "Dream Don't Come or Go");
 
 // ── 浮動符號（hero 背景） ────────────────────
 (function createParticles() {
   const hero    = document.querySelector('.hero');
-  const symbols = ['◈', '✦', '◎', '·', '◇', '○', '∴', '※'];
-  for (let i = 0; i < 14; i++) {
-    const el = document.createElement('span');
-    el.className = 'particle';
+  const symbols = ['◈', '✦', '◎', '·', '◇', '○', '∴', '※', '〇', '⊕', '✧', '⊙'];
+  const colors  = [
+    'var(--accent)',   // 紫
+    'var(--accent2)',  // 青
+    'var(--fg)',       // 白
+    '#ff8fa3',         // 粉
+    '#ffd580',         // 金
+  ];
+  for (let i = 0; i < 22; i++) {
+    const el   = document.createElement('span');
+    const size = 10 + Math.random() * 38; // 10–48px
+    el.className   = 'particle';
     el.textContent = symbols[i % symbols.length];
     el.style.cssText = [
-      `left:${Math.random() * 95}%`,
-      `top:${10 + Math.random() * 80}%`,
-      `font-size:${8 + Math.random() * 10}px`,
-      `opacity:${(0.04 + Math.random() * 0.08).toFixed(2)}`,
-      `animation-duration:${(4 + Math.random() * 5).toFixed(1)}s`,
-      `animation-delay:${(Math.random() * 5).toFixed(1)}s`,
+      `left:${Math.random() * 94}%`,
+      `top:${6 + Math.random() * 84}%`,
+      `font-size:${size.toFixed(0)}px`,
+      `opacity:${(0.05 + Math.random() * 0.18).toFixed(2)}`,
+      `color:${colors[Math.floor(Math.random() * colors.length)]}`,
+      `animation-duration:${(4 + Math.random() * 7).toFixed(1)}s`,
+      `animation-delay:${(Math.random() * 6).toFixed(1)}s`,
     ].join(';');
     hero.appendChild(el);
   }
