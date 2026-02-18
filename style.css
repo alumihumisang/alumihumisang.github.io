@@ -242,6 +242,7 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 18px;
+  min-height: 1.6em; /* 清空重打時不讓版面跳動 */
 }
 .hero-title {
   font-family: var(--ff-serif);
@@ -279,10 +280,7 @@ img { display: block; max-width: 100%; }
   letter-spacing: .08em;
   white-space: nowrap;
 }
-@keyframes marquee-bounce {
-  from { transform: translateX(0); }
-  to   { transform: translateX(var(--marquee-delta, 80px)); }
-}
+/* marquee-bounce 動畫由 main.js Web Animations API 控制 */
 
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
