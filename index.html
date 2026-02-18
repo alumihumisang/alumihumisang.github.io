@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>夢已如來</title>
+  <meta name="description" content="夢已如來 — 夢核後龐克樂團。最新單曲上線，歡迎收聽。" />
+
+  <!-- 社群分享 OG Tags -->
+  <meta property="og:title" content="夢已如來" />
+  <meta property="og:description" content="夢核後龐克 — 最新單曲上線" />
+  <meta property="og:image" content="assets/img/hero.jpg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 底噪質感疊層 -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#">夢已如來</a>
+      <button class="hamburger" id="hamburger" aria-label="選單">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#music">音樂</a>
+        <a href="#about">介紹</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">聯絡</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-bg" style="background-image:url('assets/img/hero.jpg')"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">夢核後龐克</p>
+      <h1 class="hero-title">夢已如來</h1>
+      <p class="hero-sub">最新單曲《春夏秋冬》上線</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#music">▶ 立即收聽</a>
+        <a class="btn ghost" href="#contact">演出邀約</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── 音樂區 ────────────────────────────── -->
+    <section id="music" class="section reveal">
+      <div class="section-inner">
+        <div class="section-label">MUSIC</div>
+        <h2>最新單曲</h2>
+
+        <div class="player-card" id="player-card">
+          <div class="player-art">
+            <img src="assets/img/hero.jpg" alt="春夏秋冬 封面" id="player-cover" />
+            <div class="player-art-overlay"></div>
+          </div>
+
+          <div class="player-info">
+            <div class="player-meta">
+              <p class="player-artist">夢已如來</p>
+              <h3 class="player-title">春夏秋冬</h3>
+              <p class="player-year">2026</p>
+            </div>
+
+            <!-- 進度條 -->
+            <div class="player-progress-wrap">
+              <div class="player-progress" id="progress-bar" role="slider" aria-label="播放進度">
+                <div class="player-progress-fill" id="progress-fill"></div>
+                <div class="player-progress-thumb" id="progress-thumb"></div>
+              </div>
+              <div class="player-times">
+                <span id="time-current">0:00</span>
+                <span id="time-total">0:00</span>
+              </div>
+            </div>
+
+            <!-- 控制按鈕 -->
+            <div class="player-controls">
+              <button class="ctrl-btn" id="btn-play" aria-label="播放 / 暫停">
+                <svg id="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              </button>
+            </div>
+
+            <!-- 下載 / 串流連結 -->
+            <div class="player-links">
+              <a class="btn small" href="assets/audio/song.mp3" download>↓ 下載 MP3</a>
+              <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">YouTube</a>
+              <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">Spotify</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 隱藏的原生 audio element -->
+        <audio id="audio-el" preload="metadata">
+          <source src="assets/audio/song.mp3" type="audio/mpeg" />
+          你的瀏覽器不支援音訊播放，請嘗試下載 MP3 檔案。
+        </audio>
+      </div>
+    </section>
+
+    <!-- ── 介紹區 ────────────────────────────── -->
+    <section id="about" class="section section-alt reveal">
+      <div class="section-inner">
+        <div class="section-label">ABOUT</div>
+        <h2>關於我們</h2>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              （這裡放樂團介紹文字）<br />
+              例如：我們成立於＿＿年，來自＿＿，音樂融合＿＿與＿＿，現場以＿＿著稱。
+            </p>
+            <p>
+              也可以放：成員／編制、重要演出經歷、發行紀錄、音樂靈感來源。
+            </p>
+            <ul class="about-list">
+              <li>
+                <span class="about-key">風格</span>
+                <span class="about-val">夢核 / 後龐克 / ___</span>
+              </li>
+              <li>
+                <span class="about-key">成員</span>
+                <span class="about-val">Vocal ___、Guitar ___、Bass ___、Drums ___</span>
+              </li>
+              <li>
+                <span class="about-key">據點</span>
+                <span class="about-val">台灣 ___</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="about-photo">
+            <img src="assets/img/band1.jpg" alt="樂團照片" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 相簿區 ────────────────────────────── -->
+    <section id="gallery" class="section reveal">
+      <div class="section-inner">
+        <div class="section-label">GALLERY</div>
+        <h2>影像</h2>
+        <!-- 把圖片丟進 assets/img/，修改 src 與 alt 即可 -->
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="assets/img/hero.jpg" alt="photo 1" /></div>
+          <div class="gallery-item"><img src="assets/img/band1.jpg" alt="photo 2" /></div>
+          <div class="gallery-item"><img src="assets/img/hero.jpg" alt="photo 3" /></div>
+          <div class="gallery-item"><img src="assets/img/band1.jpg" alt="photo 4" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 聯絡區 ────────────────────────────── -->
+    <section id="contact" class="section section-alt reveal">
+      <div class="section-inner">
+        <div class="section-label">CONTACT</div>
+        <h2>聯絡 / 演出邀約</h2>
+
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:yourband@email.com">
+            <div class="contact-icon">✉</div>
+            <div>
+              <p class="contact-label">Email</p>
+              <p class="contact-val">yourband@email.com</p>
+            </div>
+          </a>
+          <a class="contact-card" href="#" target="_blank" rel="noreferrer">
+            <div class="contact-icon">◎</div>
+            <div>
+              <p class="contact-label">Instagram</p>
+              <p class="contact-val">@yourband</p>
+            </div>
+          </a>
+          <a class="contact-card" href="#" target="_blank" rel="noreferrer">
+            <div class="contact-icon">▶</div>
+            <div>
+              <p class="contact-label">YouTube</p>
+              <p class="contact-val">夢已如來</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> 夢已如來. All rights reserved.</p>
+  </footer>
+
+  <!-- Lightbox（由 JS 動態插入） -->
+
+  <script src="main.js"></script>
+</body>
+</html>

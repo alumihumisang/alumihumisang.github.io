@@ -1,0 +1,152 @@
+/* ══════════════════════════════════════════════
+   夢已如來 — 網站腳本
+   ══════════════════════════════════════════════ */
+
+// ── 版權年份 ─────────────────────────────────
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ── Navigation 捲動效果 ──────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── 漢堡選單 ────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+
+hamburger?.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+// 點選任一選單連結後收合
+navLinks?.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ── Reveal 捲動動畫 ──────────────────────────
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── 音樂播放器 ───────────────────────────────
+const audio        = document.getElementById('audio-el');
+const playerCard   = document.getElementById('player-card');
+const btnPlay      = document.getElementById('btn-play');
+const iconPlay     = document.getElementById('icon-play');
+const iconPause    = document.getElementById('icon-pause');
+const progressBar  = document.getElementById('progress-bar');
+const progressFill = document.getElementById('progress-fill');
+const progressThumb= document.getElementById('progress-thumb');
+const timeCurrent  = document.getElementById('time-current');
+const timeTotal    = document.getElementById('time-total');
+
+function formatTime(sec) {
+  if (isNaN(sec)) return '0:00';
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+function setProgress(pct) {
+  progressFill.style.width  = pct + '%';
+  progressThumb.style.left  = pct + '%';
+}
+
+// 顯示總時長
+audio.addEventListener('loadedmetadata', () => {
+  timeTotal.textContent = formatTime(audio.duration);
+});
+
+// 更新進度條
+audio.addEventListener('timeupdate', () => {
+  const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+  setProgress(pct);
+  timeCurrent.textContent = formatTime(audio.currentTime);
+});
+
+// 播放結束
+audio.addEventListener('ended', () => {
+  iconPlay.style.display  = '';
+  iconPause.style.display = 'none';
+  playerCard.classList.remove('playing');
+  setProgress(0);
+  timeCurrent.textContent = '0:00';
+});
+
+// 播放 / 暫停按鈕
+btnPlay?.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    iconPlay.style.display  = 'none';
+    iconPause.style.display = '';
+    playerCard.classList.add('playing');
+  } else {
+    audio.pause();
+    iconPlay.style.display  = '';
+    iconPause.style.display = 'none';
+    playerCard.classList.remove('playing');
+  }
+});
+
+// 點擊進度條跳轉
+progressBar?.addEventListener('click', e => {
+  if (!audio.duration) return;
+  const rect = progressBar.getBoundingClientRect();
+  audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+});
+
+// 拖曳進度條
+let isDragging = false;
+progressBar?.addEventListener('mousedown', () => { isDragging = true; });
+document.addEventListener('mousemove', e => {
+  if (!isDragging || !audio.duration) return;
+  const rect = progressBar.getBoundingClientRect();
+  const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  audio.currentTime = pct * audio.duration;
+});
+document.addEventListener('mouseup', () => { isDragging = false; });
+
+// ── Lightbox ─────────────────────────────────
+const lightbox = document.createElement('div');
+lightbox.className = 'lightbox';
+lightbox.innerHTML = `
+  <img id="lb-img" alt="放大圖片" />
+  <button class="lightbox-close" aria-label="關閉">✕</button>
+`;
+document.body.appendChild(lightbox);
+
+const lbImg   = lightbox.querySelector('#lb-img');
+const lbClose = lightbox.querySelector('.lightbox-close');
+
+document.querySelectorAll('.gallery-item img').forEach(img => {
+  img.addEventListener('click', () => {
+    lbImg.src = img.src;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+lbClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
