@@ -272,6 +272,7 @@ img { display: block; max-width: 100%; }
   display: block;
   width: max-content;
   animation: marquee-bounce 2.5s ease-in-out infinite alternate;
+  animation-play-state: paused;
 }
 .marquee-track span {
   color: var(--muted);
