@@ -81,7 +81,7 @@ if (eyebrow) typewriter(eyebrow, "Dream Don't Come or Go");
   ];
   for (let i = 0; i < 22; i++) {
     const el   = document.createElement('span');
-    const size = 10 + Math.random() * 38; // 10–48px
+    const size = 6 + Math.random() * 12; // 6–18px
     el.className   = 'particle';
     el.textContent = symbols[i % symbols.length];
     el.style.cssText = [
