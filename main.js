@@ -5,6 +5,28 @@
 // ── 版權年份 ─────────────────────────────────
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// ── 反彈文字對齊 h1 ──────────────────────────
+function syncMarqueeWidth() {
+  const title   = document.querySelector('.hero-title');
+  const marquee = document.querySelector('.marquee');
+  const track   = document.querySelector('.marquee-track');
+  if (!title || !marquee || !track) return;
+
+  // 1. 先暫時解除寬度限制，量到文字的自然寬度
+  marquee.style.width = '';
+  const titleW = title.getBoundingClientRect().width;
+  const trackW = track.getBoundingClientRect().width;
+
+  // 2. 把容器鎖到 h1 寬度，超出的被 overflow:hidden 截掉
+  marquee.style.width = titleW + 'px';
+
+  // 3. 文字從左邊滑到右邊剛好貼齊「來」字的距離
+  const delta = Math.max(0, titleW - trackW);
+  track.style.setProperty('--marquee-delta', `${delta}px`);
+}
+document.fonts.ready.then(() => requestAnimationFrame(syncMarqueeWidth));
+window.addEventListener('resize', syncMarqueeWidth);
+
 // ── Navigation 捲動效果 ──────────────────────
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -28,15 +50,53 @@ navLinks?.querySelectorAll('a').forEach(a => {
   });
 });
 
+// ── 打字機效果（hero eyebrow） ───────────────
+function typewriter(el, text, speed = 70) {
+  el.textContent = '';
+  let i = 0;
+  const tick = () => {
+    el.textContent += text[i++];
+    if (i < text.length) setTimeout(tick, speed);
+  };
+  setTimeout(tick, 600);
+}
+const eyebrow = document.getElementById('eyebrow');
+if (eyebrow) typewriter(eyebrow, 'Dream Don\'t Come or Go');
+
+// ── 浮動符號（hero 背景） ────────────────────
+(function createParticles() {
+  const hero    = document.querySelector('.hero');
+  const symbols = ['◈', '✦', '◎', '·', '◇', '○', '∴', '※'];
+  for (let i = 0; i < 14; i++) {
+    const el = document.createElement('span');
+    el.className = 'particle';
+    el.textContent = symbols[i % symbols.length];
+    el.style.cssText = [
+      `left:${Math.random() * 95}%`,
+      `top:${10 + Math.random() * 80}%`,
+      `font-size:${8 + Math.random() * 10}px`,
+      `opacity:${(0.04 + Math.random() * 0.08).toFixed(2)}`,
+      `animation-duration:${(4 + Math.random() * 5).toFixed(1)}s`,
+      `animation-delay:${(Math.random() * 5).toFixed(1)}s`,
+    ].join(';');
+    hero.appendChild(el);
+  }
+})();
+
 // ── Reveal 捲動動畫 ──────────────────────────
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
+      // grid 子項目錯開進場
+      e.target.querySelectorAll('.gallery-item, .contact-card').forEach((child, i) => {
+        child.style.transitionDelay = `${i * 0.08}s`;
+        child.classList.add('visible');
+      });
       revealObserver.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 

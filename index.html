@@ -45,9 +45,15 @@
     <div class="hero-bg" style="background-image:url('assets/img/hero.jpg')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Dream Don't Come or Go</p>
-      <h1 class="hero-title">夢已如來</h1>
-      <p class="hero-sub">最新單曲《春夏秋冬》上線</p>
+      <p class="hero-eyebrow" id="eyebrow"></p>
+      <div class="hero-title-group">
+        <h1 class="hero-title" data-text="夢已如來">夢已如來</h1>
+        <div class="marquee">
+          <div class="marquee-track">
+            <span>最新單曲《春夏秋冬》上線</span>
+          </div>
+        </div>
+      </div>
       <div class="hero-cta">
         <a class="btn primary" href="#music">▶ 立即收聽</a>
         <a class="btn ghost" href="#contact">聯絡我們</a>
@@ -63,7 +69,7 @@
 
     <!-- ── 音樂區 ────────────────────────────── -->
     <section id="music" class="section reveal">
-      <div class="section-inner">
+      <div class="section-inner" data-num="01">
         <div class="section-label">MUSIC</div>
         <h2>最新單曲</h2>
 
@@ -119,7 +125,7 @@
 
     <!-- ── 介紹區 ────────────────────────────── -->
     <section id="about" class="section section-alt reveal">
-      <div class="section-inner">
+      <div class="section-inner" data-num="02">
         <div class="section-label">ABOUT</div>
         <h2>關於我們</h2>
 
@@ -132,25 +138,24 @@
               我們還在這邊耍白痴 <br />
               最接近電子的時刻 <br />
               已經夢遺或是我是阿姨 <br />
-              樂團一直在這mono synth還在尋找他的衛星 <br /> <br />
-              bass 阿魯 vocal 翠斯特 guitar 摳z drum 丁boy
+              樂團一直在這mono synth還在尋找他的衛星
             </p>
             <p>
-              也可以放：成員／編制、重要演出經歷、發行紀錄、音樂靈感來源。
+              ***也可以放：成員／編制、重要演出經歷、發行紀錄、音樂靈感來源。
             </p>
             <ul class="about-list">
               <li>
                 <span class="about-key">風格</span>
-                <span class="about-val">夢核 / 後龐克 / ___</span>
+                <span class="about-val">夢核 / 龐克</span>
               </li>
               <li>
                 <span class="about-key">成員</span>
-                <span class="about-val">Vocal ___、Guitar ___、Bass ___、Drums ___</span>
+                <span class="about-val">Vocal 翠斯特、Guitar 摳z、Bass 阿魯、Drums 丁boy</span>
               </li>
-              <li>
+              <!-- <li>
                 <span class="about-key">據點</span>
-                <span class="about-val">台灣 ___</span>
-              </li>
+                <span class="about-val">台灣 </span>
+              </li> -->
             </ul>
           </div>
 
@@ -163,7 +168,7 @@
 
     <!-- ── 相簿區 ────────────────────────────── -->
     <section id="gallery" class="section reveal">
-      <div class="section-inner">
+      <div class="section-inner" data-num="03">
         <div class="section-label">GALLERY</div>
         <h2>影像</h2>
         <!-- 把圖片丟進 assets/img/，修改 src 與 alt 即可 -->
@@ -178,7 +183,7 @@
 
     <!-- ── 聯絡區 ────────────────────────────── -->
     <section id="contact" class="section section-alt reveal">
-      <div class="section-inner">
+      <div class="section-inner" data-num="04">
         <div class="section-label">CONTACT</div>
         <h2>聯絡 / 演出邀約</h2>
 
@@ -187,7 +192,7 @@
             <div class="contact-icon">✉</div>
             <div>
               <p class="contact-label">Email</p>
-              <p class="contact-val">yourband@email.com</p>
+              <p class="contact-val">wetdream.dont.come.or.go@gmail.com</p>
             </div>
           </a>
           <a class="contact-card" href="#" target="_blank" rel="noreferrer">
