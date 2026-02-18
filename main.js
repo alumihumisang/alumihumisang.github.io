@@ -23,8 +23,8 @@ function syncMarqueeWidth() {
   // 3. 文字從左邊滑到右邊剛好貼齊「來」字的距離
   const delta = Math.max(0, titleW - trackW);
   track.style.setProperty('--marquee-delta', `${delta}px`);
-  // 算好之後才開始播
-  track.style.animationPlayState = 'running';
+  // 算好之後才掛上 animation，確保第一次就是正確範圍
+  track.style.animation = 'marquee-bounce 2.5s ease-in-out infinite alternate';
 }
 document.fonts.ready.then(() => requestAnimationFrame(syncMarqueeWidth));
 window.addEventListener('resize', syncMarqueeWidth);

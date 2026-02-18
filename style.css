@@ -271,8 +271,7 @@ img { display: block; max-width: 100%; }
 .marquee-track {
   display: block;
   width: max-content;
-  animation: marquee-bounce 2.5s ease-in-out infinite alternate;
-  animation-play-state: paused;
+  /* animation 由 JS 在量完寬度後才設定 */
 }
 .marquee-track span {
   color: var(--muted);
