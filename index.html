@@ -15,7 +15,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700&family=M+PLUS+1+Code:wght@400&family=Noto+Serif+TC:wght@300;400;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -220,6 +220,31 @@
   </footer>
 
   <!-- Lightbox（由 JS 動態插入） -->
+
+  <!-- Loading Screen -->
+  <div id="loader" aria-hidden="true">
+    <!-- 底層點陣背景 -->
+    <div class="ldr-grid"></div>
+    <!-- 水平 glitch 條 -->
+    <div class="ldr-glitch"></div>
+    <!-- 四角框 -->
+    <div class="ldr-corners">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <!-- 主體雙語 -->
+    <div class="ldr-center">
+      <div class="ldr-glow"></div>
+      <p class="ldr-lang ldr-en">Loading</p>
+      <p class="ldr-lang ldr-ja">読み込み中</p>
+      <!-- 進度條緊接文字下方 -->
+      <div class="ldr-foot">
+        <div class="ldr-bar">
+          <div class="loader-fill" id="loader-fill"></div>
+        </div>
+        <p class="ldr-status">INITIALIZING</p>
+      </div>
+    </div>
+  </div>
 
   <script src="main.js"></script>
 </body>

@@ -636,6 +636,259 @@ h2 {
 }
 .contact-val { font-size: 14px; }
 
+/* ── Loader ─────────────────────────────────── */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background:
+    radial-gradient(ellipse 70% 50% at 72% 22%, rgba(50,12,90,.75) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 40% at 18% 72%, rgba(8,20,75,.65) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 55% at 50% 50%, rgba(22,6,50,.45) 0%, transparent 65%),
+    #010106;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 1s cubic-bezier(.76, 0, .24, 1);
+}
+/* 銀河斜帶 */
+#loader::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    128deg,
+    transparent 22%,
+    rgba(170,150,255,.018) 36%,
+    rgba(210,200,255,.042) 50%,
+    rgba(170,150,255,.018) 64%,
+    transparent 78%
+  );
+  pointer-events: none;
+}
+#loader.done {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* 內容淡出（exit 第一階段） */
+#loader.fading .ldr-center,
+#loader.fading .ldr-foot,
+#loader.fading .ldr-hud,
+#loader.fading .ldr-corners span {
+  opacity: 0 !important;
+  transition: opacity .35s ease !important;
+}
+
+/* 點陣背景（極淡） */
+.ldr-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(157,143,255,.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+/* 流星 */
+.ldr-meteor {
+  position: absolute;
+  height: 1px;
+  transform-origin: right center;
+  pointer-events: none;
+  background: linear-gradient(to left,
+    transparent 0%,
+    rgba(180,160,255,.25) 30%,
+    rgba(255,255,255,.95) 85%,
+    white 100%
+  );
+}
+
+/* 水平 Glitch 條 */
+.ldr-glitch {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: rgba(157,143,255,.5);
+  pointer-events: none;
+  animation: ldrGlitch 5s steps(1) infinite;
+}
+@keyframes ldrGlitch {
+  0%,100% { top: 30%; opacity: 0; }
+  10%      { opacity: .7; }
+  10.5%    { top: 68%; opacity: 0; }
+  35%      { top: 20%; opacity: 0; }
+  35.3%    { opacity: .5; }
+  35.6%    { opacity: 0; }
+  70%      { top: 55%; opacity: 0; }
+  70.4%    { opacity: .6; }
+  70.7%    { opacity: 0; }
+}
+
+/* 四角框 */
+.ldr-corners span {
+  position: absolute;
+  width: 24px; height: 24px;
+  border-color: rgba(157,143,255,.65);
+  border-style: solid;
+  opacity: 0;
+  animation: ldrIn .6s ease .2s forwards;
+  box-shadow: 0 0 8px rgba(157,143,255,.3), inset 0 0 4px rgba(157,143,255,.1);
+}
+.ldr-corners span:nth-child(1) { top: 36px;  left: 36px;  border-width: 1px 0 0 1px; }
+.ldr-corners span:nth-child(2) { top: 36px;  right: 36px; border-width: 1px 1px 0 0; }
+.ldr-corners span:nth-child(3) { bottom: 36px; left: 36px;  border-width: 0 0 1px 1px; }
+.ldr-corners span:nth-child(4) { bottom: 36px; right: 36px; border-width: 0 1px 1px 0; }
+
+/* HUD 角落文字 */
+.ldr-hud {
+  position: absolute;
+  font-size: 9px;
+  letter-spacing: .22em;
+  color: var(--muted);
+  opacity: 0;
+  animation: ldrIn .5s ease .4s forwards;
+}
+.ldr-hud-tl { top: 48px;    left: 72px; }
+.ldr-hud-tr { top: 48px;    right: 72px; }
+.ldr-hud-bl { bottom: 48px; left: 72px; }
+.ldr-hud-br { bottom: 48px; right: 72px; }
+
+/* 主體容器 */
+.ldr-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 中央光暈 — 水面倒影 */
+.ldr-glow {
+  position: absolute;
+  width: 320px; height: 110px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse,
+    rgba(80, 200, 165, .09) 0%,
+    rgba(55, 170, 215, .05) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: ldrGlow 4s ease-in-out infinite alternate;
+}
+@keyframes ldrGlow {
+  from { opacity: .45; transform: translate(-50%,-50%) scale(1); }
+  to   { opacity: .9;  transform: translate(-50%,-50%) scale(1.12); }
+}
+
+
+/* 語言文字 — 打字機字體 */
+.ldr-lang {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  font-family: 'Courier Prime', 'M PLUS 1 Code', monospace;
+  font-weight: 400;
+  font-size: clamp(11px, 1.7vw, 18px);
+  letter-spacing: .06em;
+  color: rgba(157, 143, 255, .42);
+}
+
+/* 進度條 — 緊接文字正下方 */
+.ldr-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  opacity: 0;
+  animation: ldrIn .5s ease 1.1s forwards;
+}
+.ldr-bar {
+  width: min(280px, 60vw);
+  height: 3px;
+  background: rgba(157,143,255,.05);
+  border: 1px solid rgba(157,143,255,.2);
+  position: relative;
+  box-shadow: 0 0 14px rgba(157,143,255,.1);
+}
+/* 掃描光點 */
+.ldr-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(157,143,255,.45) 50%,
+    transparent 100%
+  );
+  background-size: 38% 100%;
+  background-repeat: no-repeat;
+  animation: barScan 2s linear infinite;
+  pointer-events: none;
+}
+@keyframes barScan {
+  from { background-position: -38% 0; }
+  to   { background-position: 140% 0; }
+}
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, var(--accent2), var(--accent));
+  transition: width .55s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 8px var(--accent), 0 0 18px rgba(96,232,216,.35);
+}
+/* 前緣游標亮線 */
+.loader-fill::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 2px;
+  height: calc(100% + 6px);
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 0 6px rgba(255,255,255,.8), 0 0 12px var(--accent2);
+}
+.ldr-status {
+  font-size: 9px;
+  letter-spacing: .35em;
+  color: rgba(157,143,255,.5);
+  margin: 0;
+  animation: ldrFlicker 7s steps(1) infinite;
+}
+@keyframes ldrFlicker {
+  0%,100% { opacity: 1; }
+  22%      { opacity: .35; }
+  22.3%    { opacity: 1;   }
+  22.7%    { opacity: .15; }
+  23.1%    { opacity: 1;   }
+  67%      { opacity: 1;   }
+  67.2%    { opacity: .5;  }
+  67.5%    { opacity: 1;   }
+}
+
+/* 閃爍星點 */
+.ldr-star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  animation: ldrTwinkle ease-in-out infinite alternate;
+}
+@keyframes ldrTwinkle {
+  from { opacity: 0;   transform: scale(.4); }
+  to   { opacity: .85; transform: scale(1); }
+}
+
+@keyframes ldrIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* ── Footer ─────────────────────────────────── */
 .footer {
   border-top: 1px solid var(--border);

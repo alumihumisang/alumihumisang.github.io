@@ -5,6 +5,146 @@
 // ── 版權年份 ─────────────────────────────────
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// ── Loader ───────────────────────────────────
+const loader     = document.getElementById('loader');
+const loaderFill = document.getElementById('loader-fill');
+let minTimeDone  = false;
+let calcDone     = false;
+
+function dismissLoader() {
+  if (!minTimeDone || !calcDone) return;
+  // 進度條跑滿
+  loaderFill.style.width = '100%';
+  setTimeout(() => {
+    // 第一階段：內容淡出
+    loader.classList.add('fading');
+    setTimeout(() => {
+      // 第二階段：整頁往上滑走
+      loader.classList.add('done');
+      setTimeout(() => loader.remove(), 1100);
+    }, 450);
+  }, 500);
+}
+
+// 銀河星點
+(function createLoaderStars() {
+  const el = document.getElementById('loader');
+  if (!el) return;
+  // 星色：藍白、冷白、紫白、暖白
+  const colors = ['255,255,255','200,215,255','210,195,255','255,248,220'];
+  // ASCII 符號星
+  const ascii = ['✦','✧','⋆','✸','⊹','✩','☆','∘','·'];
+
+  for (let i = 0; i < 115; i++) {
+    const isAscii = i >= 85; // 前 85 顆點狀，後 30 顆 ASCII
+    const s = document.createElement(isAscii ? 'span' : 'div');
+    const c = colors[Math.floor(Math.random() * colors.length)];
+    // 70% 沿對角線銀河帶分布，30% 隨機散佈
+    let left, top;
+    if (Math.random() < .7) {
+      const t = Math.random();
+      left = 15 + t * 65 + (Math.random() - .5) * 18;
+      top  = 10 + t * 78 + (Math.random() - .5) * 18;
+    } else {
+      left = Math.random() * 100;
+      top  = Math.random() * 100;
+    }
+    s.className = 'ldr-star';
+    if (isAscii) {
+      const size = 5 + Math.random() * 7; // 5–12px
+      s.textContent = ascii[Math.floor(Math.random() * ascii.length)];
+      s.style.cssText = [
+        `left:${left.toFixed(1)}%`,
+        `top:${top.toFixed(1)}%`,
+        `font-size:${size.toFixed(0)}px`,
+        `color:rgb(${c})`,
+        `background:transparent`,
+        `line-height:1`,
+        `animation-delay:${(Math.random() * 6).toFixed(2)}s`,
+        `animation-duration:${(2 + Math.random() * 4).toFixed(2)}s`,
+      ].join(';');
+    } else {
+      const big = Math.random() < .12;
+      s.style.cssText = [
+        `left:${left.toFixed(1)}%`,
+        `top:${top.toFixed(1)}%`,
+        `width:${big ? 2 : 1}px`,
+        `height:${big ? 2 : 1}px`,
+        `background:rgb(${c})`,
+        `animation-delay:${(Math.random() * 5).toFixed(2)}s`,
+        `animation-duration:${(1.5 + Math.random() * 3.5).toFixed(2)}s`,
+        big ? `box-shadow:0 0 3px 1px rgba(${c},.5)` : '',
+      ].join(';');
+    }
+    el.appendChild(s);
+  }
+})();
+
+// 流星雨（避開中央文字區）
+(function createMeteors() {
+  const el = document.getElementById('loader');
+  if (!el) return;
+  let running = true;
+
+  // 顏色：白、紫白、藍白、淡金
+  const heads = ['255,255,255','220,210,255','195,215,255','255,248,200'];
+
+  function spawn() {
+    if (!running || !el.parentNode) return;
+
+    const m       = document.createElement('div');
+    m.className   = 'ldr-meteor';
+
+    // 流星角度：往右下方落（30–55 度）
+    const angle   = 30 + Math.random() * 25;
+    const length  = 35 + Math.random() * 65;  // 尾巴長度 px
+    const speed   = 380 + Math.random() * 520; // 持續時間 ms
+    const c       = heads[Math.floor(Math.random() * heads.length)];
+
+    // 起始點：左側邊緣 (0–28%) 或右側邊緣 (72–100%)
+    const fromLeft = Math.random() < 0.5;
+    const startX   = fromLeft
+      ? Math.random() * 28
+      : 72 + Math.random() * 28;
+    const startY   = Math.random() * 45; // 上半部
+
+    m.style.cssText = [
+      `left:${startX}%`,
+      `top:${startY}%`,
+      `width:${length}px`,
+      `transform:rotate(${angle}deg)`,
+      `background:linear-gradient(to left,transparent 0%,rgba(${c},.2) 35%,rgba(${c},.95) 85%,rgb(${c}) 100%)`,
+    ].join(';');
+
+    el.appendChild(m);
+
+    // 沿角度方向飛行，飛完就消失
+    const rad  = angle * Math.PI / 180;
+    const dist = 90 + Math.random() * 110;
+    m.animate(
+      [
+        { transform: `rotate(${angle}deg) translateX(0)`,        opacity: 0 },
+        { transform: `rotate(${angle}deg) translateX(${dist*.15}px)`, opacity: 1,   offset: 0.12 },
+        { transform: `rotate(${angle}deg) translateX(${dist*.8}px)`,  opacity: 0.7, offset: 0.75 },
+        { transform: `rotate(${angle}deg) translateX(${dist}px)`, opacity: 0 },
+      ],
+      { duration: speed, easing: 'ease-in' }
+    ).onfinish = () => m.remove();
+
+    setTimeout(spawn, 140 + Math.random() * 320);
+  }
+
+  spawn();
+
+  // loader 移除後停止
+  new MutationObserver((_, obs) => {
+    if (!document.getElementById('loader')) { running = false; obs.disconnect(); }
+  }).observe(document.body, { childList: true });
+})();
+
+// 最短顯示時間（讓動畫來得及看清楚）
+setTimeout(() => { minTimeDone = true; dismissLoader(); }, 1800);
+
 // ── 反彈文字對齊 h1 ──────────────────────────
 function syncMarqueeWidth() {
   const title   = document.querySelector('.hero-title');
@@ -12,25 +152,21 @@ function syncMarqueeWidth() {
   const track   = document.querySelector('.marquee-track');
   if (!title || !marquee || !track) return;
 
-  // 1. 先暫時解除寬度限制，量到文字的自然寬度
   marquee.style.width = '';
   const titleW = title.getBoundingClientRect().width;
   const trackW = track.getBoundingClientRect().width;
-
-  // 2. 把容器鎖到 h1 寬度，超出的被 overflow:hidden 截掉
   marquee.style.width = titleW + 'px';
 
-  // 3. 文字從左邊滑到右邊剛好貼齊「來」字的距離
   const delta = Math.max(0, titleW - trackW);
-
-  // 取消舊的動畫再重新建立，避免 resize 時疊加
   track.getAnimations().forEach(a => a.cancel());
-
-  // Web Animations API：完全由 JS 控制，不依賴 CSS variable
   track.animate(
     [{ transform: 'translateX(0)' }, { transform: `translateX(${delta}px)` }],
     { duration: 2500, easing: 'ease-in-out', iterations: Infinity, direction: 'alternate' }
   );
+
+  // JS 計算完成，通知 loader
+  calcDone = true;
+  dismissLoader();
 }
 document.fonts.ready.then(() => requestAnimationFrame(syncMarqueeWidth));
 window.addEventListener('resize', syncMarqueeWidth);
