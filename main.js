@@ -10,21 +10,103 @@ const loader     = document.getElementById('loader');
 const loaderFill = document.getElementById('loader-fill');
 let minTimeDone  = false;
 let calcDone     = false;
+let langDone     = false;
 
 function dismissLoader() {
-  if (!minTimeDone || !calcDone) return;
-  // 進度條跑滿
+  if (!minTimeDone || !calcDone || !langDone) return;
+  if (!document.getElementById('loader')) return; // 已移除
   loaderFill.style.width = '100%';
   setTimeout(() => {
-    // 第一階段：內容淡出
     loader.classList.add('fading');
     setTimeout(() => {
-      // 第二階段：整頁往上滑走
       loader.classList.add('done');
-      setTimeout(() => loader.remove(), 1100);
+      setTimeout(() => {
+        loader.remove();
+        syncMarqueeWidth(); // 套用語言後重新對齊 marquee
+      }, 1100);
     }, 450);
   }, 500);
 }
+
+// ── 多語言翻譯 ───────────────────────────────
+const translations = {
+  zh: {
+    'nav-music':'音樂','nav-about':'介紹','nav-gallery':'Gallery','nav-contact':'聯絡',
+    'btn-listen':'▶ 立即收聽','btn-contact':'聯絡我們',
+    'marquee':'最新單曲《春夏秋冬》上線',
+    'sec-music':'MUSIC','h-music':'最新單曲','btn-dl':'↓ 下載 MP3',
+    'sec-about':'ABOUT','h-about':'關於我們',
+    'sec-gallery':'GALLERY','h-gallery':'影像',
+    'sec-contact':'CONTACT','h-contact':'聯絡 / 演出邀約',
+    'c-email':'Email','c-ig':'Instagram','c-yt':'YouTube',
+    'eyebrow':"Dream Don't Come or Go",
+  },
+  en: {
+    'nav-music':'Music','nav-about':'About','nav-gallery':'Gallery','nav-contact':'Contact',
+    'btn-listen':'▶ Listen Now','btn-contact':'Contact Us',
+    'marquee':'New Single《Spring Summer Autumn Winter》Out Now',
+    'sec-music':'MUSIC','h-music':'Latest Single','btn-dl':'↓ Download MP3',
+    'sec-about':'ABOUT','h-about':'About',
+    'sec-gallery':'GALLERY','h-gallery':'Gallery',
+    'sec-contact':'CONTACT','h-contact':'Contact / Booking',
+    'c-email':'Email','c-ig':'Instagram','c-yt':'YouTube',
+    'eyebrow':"Dream Don't Come or Go",
+  },
+  ja: {
+    'nav-music':'音楽','nav-about':'紹介','nav-gallery':'ギャラリー','nav-contact':'連絡',
+    'btn-listen':'▶ 今すぐ聴く','btn-contact':'お問い合わせ',
+    'marquee':'最新シングル《春夏秋冬》配信中',
+    'sec-music':'MUSIC','h-music':'最新シングル','btn-dl':'↓ MP3ダウンロード',
+    'sec-about':'ABOUT','h-about':'バンドについて',
+    'sec-gallery':'GALLERY','h-gallery':'ギャラリー',
+    'sec-contact':'CONTACT','h-contact':'連絡 / ライブ依頼',
+    'c-email':'メール','c-ig':'Instagram','c-yt':'YouTube',
+    'eyebrow':"Dream Don't Come or Go",
+  },
+};
+
+function applyLang(lang) {
+  const t = translations[lang] || translations.zh;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t[el.dataset.i18n];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.documentElement.lang = {zh:'zh-Hant',en:'en',ja:'ja'}[lang] || 'zh-Hant';
+  localStorage.setItem('lang', lang);
+}
+
+// ── 語言選擇器初始化 ─────────────────────────
+(function initLangPicker() {
+  const pickBtns = document.querySelectorAll('.ldr-pick-btn');
+
+  // 偵測瀏覽器語言或讀取已儲存選擇
+  const saved = localStorage.getItem('lang');
+  let detected = 'zh';
+  if (!saved) {
+    const nav = (navigator.language || '').toLowerCase();
+    if (nav.startsWith('ja')) detected = 'ja';
+    else if (nav.startsWith('en')) detected = 'en';
+    else detected = 'zh';
+  }
+  const initLang = saved || detected;
+
+  // 標記預設選取的按鈕
+  pickBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === initLang));
+
+  // 預套用語言（畫面先顯示正確語言，但仍等使用者點擊確認）
+  applyLang(initLang);
+
+  // 按鈕點擊
+  pickBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pickBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyLang(btn.dataset.lang);
+      langDone = true;
+      dismissLoader();
+    });
+  });
+})();
 
 // 銀河星點
 (function createLoaderStars() {
@@ -194,17 +276,19 @@ navLinks?.querySelectorAll('a').forEach(a => {
   });
 });
 
-// ── 打字機效果（循環） ───────────────────────
+// ── 打字機效果（循環，可中途取消） ──────────
+let _twGen = 0;
 function typewriter(el, text, speed = 70) {
+  const gen = ++_twGen;
   el.textContent = '';
   let i = 0;
   const type = () => {
+    if (_twGen !== gen) return; // 被新呼叫取消
     el.textContent += text[i++];
     if (i < text.length) {
       setTimeout(type, speed);
     } else {
-      // 停頓後清空再重打
-      setTimeout(() => typewriter(el, text, speed), 2200);
+      setTimeout(() => { if (_twGen === gen) typewriter(el, text, speed); }, 2200);
     }
   };
   setTimeout(type, 600);
