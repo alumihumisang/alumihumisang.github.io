@@ -106,6 +106,11 @@ function applyLang(lang) {
       dismissLoader();
     });
   });
+
+  // 防呆：8 秒內沒點就自動用預設語言繼續
+  setTimeout(() => {
+    if (!langDone) { langDone = true; dismissLoader(); }
+  }, 8000);
 })();
 
 // 銀河星點
