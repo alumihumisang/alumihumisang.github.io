@@ -32,10 +32,10 @@
         <span></span><span></span><span></span>
       </button>
       <div class="nav-links" id="nav-links">
-        <a href="#music">音樂</a>
-        <a href="#about">介紹</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">聯絡</a>
+        <a href="#music" data-i18n="nav-music">音樂</a>
+        <a href="#about" data-i18n="nav-about">介紹</a>
+        <a href="#gallery" data-i18n="nav-gallery">Gallery</a>
+        <a href="#contact" data-i18n="nav-contact">聯絡</a>
       </div>
     </div>
   </nav>
@@ -50,13 +50,13 @@
         <h1 class="hero-title" data-text="夢已如來">夢已如來</h1>
         <div class="marquee">
           <div class="marquee-track">
-            <span>最新單曲《春夏秋冬》上線</span>
+            <span data-i18n="marquee">最新單曲《春夏秋冬》上線</span>
           </div>
         </div>
       </div>
       <div class="hero-cta">
-        <a class="btn primary" href="#music">▶ 立即收聽</a>
-        <a class="btn ghost" href="#contact">聯絡我們</a>
+        <a class="btn primary" href="#music" data-i18n="btn-listen">▶ 立即收聽</a>
+        <a class="btn ghost" href="#contact" data-i18n="btn-contact">聯絡我們</a>
       </div>
     </div>
     <div class="hero-scroll" aria-hidden="true">
@@ -70,8 +70,8 @@
     <!-- ── 音樂區 ────────────────────────────── -->
     <section id="music" class="section reveal">
       <div class="section-inner" data-num="01">
-        <div class="section-label">MUSIC</div>
-        <h2>最新單曲</h2>
+        <div class="section-label" data-i18n="sec-music">MUSIC</div>
+        <h2 data-i18n="h-music">最新單曲</h2>
 
         <div class="player-card" id="player-card">
           <div class="player-art">
@@ -108,7 +108,7 @@
 
             <!-- 下載 / 串流連結 -->
             <div class="player-links">
-              <a class="btn small" href="assets/audio/song.mp3" download>↓ 下載 MP3</a>
+              <a class="btn small" href="assets/audio/song.mp3" download data-i18n="btn-dl">↓ 下載 MP3</a>
               <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">YouTube</a>
               <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">Spotify</a>
             </div>
@@ -126,8 +126,8 @@
     <!-- ── 介紹區 ────────────────────────────── -->
     <section id="about" class="section section-alt reveal">
       <div class="section-inner" data-num="02">
-        <div class="section-label">ABOUT</div>
-        <h2>關於我們</h2>
+        <div class="section-label" data-i18n="sec-about">ABOUT</div>
+        <h2 data-i18n="h-about">關於我們</h2>
 
         <div class="about-grid">
           <div class="about-text">
@@ -169,8 +169,8 @@
     <!-- ── 相簿區 ────────────────────────────── -->
     <section id="gallery" class="section reveal">
       <div class="section-inner" data-num="03">
-        <div class="section-label">GALLERY</div>
-        <h2>影像</h2>
+        <div class="section-label" data-i18n="sec-gallery">GALLERY</div>
+        <h2 data-i18n="h-gallery">影像</h2>
         <!-- 把圖片丟進 assets/img/，修改 src 與 alt 即可 -->
         <div class="gallery-grid">
           <div class="gallery-item"><img src="assets/img/hero.jpg" alt="photo 1" /></div>
@@ -184,28 +184,28 @@
     <!-- ── 聯絡區 ────────────────────────────── -->
     <section id="contact" class="section section-alt reveal">
       <div class="section-inner" data-num="04">
-        <div class="section-label">CONTACT</div>
-        <h2>聯絡 / 演出邀約</h2>
+        <div class="section-label" data-i18n="sec-contact">CONTACT</div>
+        <h2 data-i18n="h-contact">聯絡 / 演出邀約</h2>
 
         <div class="contact-grid">
           <a class="contact-card" href="mailto:yourband@email.com">
             <div class="contact-icon">✉</div>
             <div>
-              <p class="contact-label">Email</p>
+              <p class="contact-label" data-i18n="c-email">Email</p>
               <p class="contact-val">wetdream.dont.come.or.go@gmail.com</p>
             </div>
           </a>
           <a class="contact-card" href="#" target="_blank" rel="noreferrer">
             <div class="contact-icon">◎</div>
             <div>
-              <p class="contact-label">Instagram</p>
+              <p class="contact-label" data-i18n="c-ig">Instagram</p>
               <p class="contact-val">@dream_dont_come_or_go</p>
             </div>
           </a>
           <a class="contact-card" href="#" target="_blank" rel="noreferrer">
             <div class="contact-icon">▶</div>
             <div>
-              <p class="contact-label">YouTube</p>
+              <p class="contact-label" data-i18n="c-yt">YouTube</p>
               <p class="contact-val">@夢已如來</p>
             </div>
           </a>
@@ -236,6 +236,14 @@
       <div class="ldr-glow"></div>
       <p class="ldr-lang ldr-en">Loading</p>
       <p class="ldr-lang ldr-ja">読み込み中</p>
+      <!-- 語言選擇 -->
+      <div class="ldr-pick" id="ldr-pick">
+        <button class="ldr-pick-btn" data-lang="zh">中文</button>
+        <span class="ldr-pick-sep">·</span>
+        <button class="ldr-pick-btn" data-lang="en">EN</button>
+        <span class="ldr-pick-sep">·</span>
+        <button class="ldr-pick-btn" data-lang="ja">日本語</button>
+      </div>
       <!-- 進度條緊接文字下方 -->
       <div class="ldr-foot">
         <div class="ldr-bar">
