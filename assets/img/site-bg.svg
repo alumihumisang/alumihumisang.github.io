@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- 左上紫色星雲 -->
+    <radialGradient id="n1" cx="27%" cy="32%" r="58%" gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#2e0068" stop-opacity=".9"/>
+      <stop offset="45%"  stop-color="#110028" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#020107" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 右下深藍虛空 -->
+    <radialGradient id="n2" cx="82%" cy="74%" r="52%" gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#03153a" stop-opacity=".85"/>
+      <stop offset="50%"  stop-color="#010c22" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#020107" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 中央暗核 -->
+    <radialGradient id="n3" cx="52%" cy="52%" r="60%" gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#0d0220" stop-opacity=".6"/>
+      <stop offset="100%" stop-color="#020107" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 右上藍紫邊光 -->
+    <radialGradient id="n4" cx="90%" cy="12%" r="40%" gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#1a0048" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#020107" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 左下青黑邊光 -->
+    <radialGradient id="n5" cx="8%" cy="88%" r="38%" gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#00162a" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#020107" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 對角銀河帶 -->
+    <linearGradient id="mw" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="22%"  stop-color="#020107" stop-opacity="0"/>
+      <stop offset="38%"  stop-color="#8870cc" stop-opacity=".022"/>
+      <stop offset="50%"  stop-color="#a090d8" stop-opacity=".038"/>
+      <stop offset="62%"  stop-color="#8870cc" stop-opacity=".022"/>
+      <stop offset="78%"  stop-color="#020107" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 底色 -->
+  <rect width="1920" height="1080" fill="#020107"/>
+
+  <!-- 星雲層次 -->
+  <rect width="1920" height="1080" fill="url(#n1)"/>
+  <rect width="1920" height="1080" fill="url(#n2)"/>
+  <rect width="1920" height="1080" fill="url(#n3)"/>
+  <rect width="1920" height="1080" fill="url(#n4)"/>
+  <rect width="1920" height="1080" fill="url(#n5)"/>
+
+  <!-- 對角銀河微光 -->
+  <rect width="1920" height="1080" fill="url(#mw)"/>
+
+  <!-- 細小星點 -->
+  <circle cx="142"  cy="88"   r=".8" fill="white" opacity=".7"/>
+  <circle cx="380"  cy="55"   r=".6" fill="white" opacity=".5"/>
+  <circle cx="620"  cy="140"  r="1"  fill="#c8b8ff" opacity=".6"/>
+  <circle cx="890"  cy="72"   r=".7" fill="white" opacity=".55"/>
+  <circle cx="1100" cy="35"   r=".9" fill="#b8d4ff" opacity=".6"/>
+  <circle cx="1350" cy="110"  r=".6" fill="white" opacity=".45"/>
+  <circle cx="1580" cy="68"   r="1"  fill="white" opacity=".5"/>
+  <circle cx="1780" cy="145"  r=".7" fill="#c8b8ff" opacity=".55"/>
+  <circle cx="55"   cy="320"  r=".8" fill="white" opacity=".4"/>
+  <circle cx="240"  cy="410"  r=".6" fill="#b8d4ff" opacity=".45"/>
+  <circle cx="1820" cy="380"  r=".9" fill="white" opacity=".5"/>
+  <circle cx="1650" cy="290"  r=".6" fill="white" opacity=".4"/>
+  <circle cx="760"  cy="920"  r="1"  fill="#c8b8ff" opacity=".5"/>
+  <circle cx="1200" cy="980"  r=".7" fill="white" opacity=".4"/>
+  <circle cx="1700" cy="870"  r=".8" fill="#b8d4ff" opacity=".45"/>
+  <circle cx="80"   cy="740"  r=".6" fill="white" opacity=".4"/>
+  <circle cx="440"  cy="820"  r=".9" fill="white" opacity=".35"/>
+  <circle cx="320"  cy="190"  r=".5" fill="#d8c8ff" opacity=".6"/>
+  <circle cx="680"  cy="48"   r=".7" fill="white" opacity=".5"/>
+  <circle cx="1460" cy="195"  r=".6" fill="white" opacity=".5"/>
+  <circle cx="1880" cy="560"  r=".8" fill="#c8b8ff" opacity=".4"/>
+  <circle cx="30"   cy="550"  r=".6" fill="white" opacity=".35"/>
+  <circle cx="960"  cy="1065" r=".7" fill="white" opacity=".35"/>
+  <circle cx="510"  cy="640"  r=".5" fill="#b8d4ff" opacity=".4"/>
+  <circle cx="1300" cy="750"  r=".8" fill="white" opacity=".38"/>
+</svg>
