@@ -20,10 +20,7 @@ function dismissLoader() {
     loader.classList.add('fading');
     setTimeout(() => {
       loader.classList.add('done');
-      setTimeout(() => {
-        loader.remove();
-        syncMarqueeWidth(); // 套用語言後重新對齊 marquee
-      }, 1100);
+      setTimeout(() => { loader.remove(); window.scrollTo(0, 0); }, 1100);
     }, 450);
   }, 500);
 }
@@ -73,6 +70,7 @@ function applyLang(lang) {
   });
   document.documentElement.lang = {zh:'zh-Hant',en:'en',ja:'ja'}[lang] || 'zh-Hant';
   localStorage.setItem('lang', lang);
+  requestAnimationFrame(syncMarqueeWidth); // 文字換了就立刻重新對齊
 }
 
 // ── 語言選擇器初始化 ─────────────────────────
@@ -244,12 +242,14 @@ function syncMarqueeWidth() {
   const trackW = track.getBoundingClientRect().width;
   marquee.style.width = titleW + 'px';
 
-  const delta = Math.max(0, titleW - trackW);
+  const delta = titleW - trackW; // 負值 = 文字比標題寬，往左 ping-pong
   track.getAnimations().forEach(a => a.cancel());
-  track.animate(
-    [{ transform: 'translateX(0)' }, { transform: `translateX(${delta}px)` }],
-    { duration: 2500, easing: 'ease-in-out', iterations: Infinity, direction: 'alternate' }
-  );
+  if (delta !== 0) {
+    track.animate(
+      [{ transform: 'translateX(0)' }, { transform: `translateX(${delta}px)` }],
+      { duration: 2500, easing: 'ease-in-out', iterations: Infinity, direction: 'alternate' }
+    );
+  }
 
   // JS 計算完成，通知 loader
   calcDone = true;
