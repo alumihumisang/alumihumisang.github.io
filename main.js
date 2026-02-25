@@ -15,12 +15,16 @@ let langDone     = false;
 function dismissLoader() {
   if (!minTimeDone || !calcDone || !langDone) return;
   if (!document.getElementById('loader')) return; // 已移除
+  // loader 完全遮住畫面時先偷偷滾到頂，使用者看不見移動
+  document.documentElement.style.scrollBehavior = 'auto';
+  window.scrollTo(0, 0);
+  document.documentElement.style.scrollBehavior = '';
   loaderFill.style.width = '100%';
   setTimeout(() => {
     loader.classList.add('fading');
     setTimeout(() => {
       loader.classList.add('done');
-      setTimeout(() => { loader.remove(); window.scrollTo(0, 0); }, 1100);
+      setTimeout(() => { loader.remove(); }, 1100);
     }, 450);
   }, 500);
 }
