@@ -39,7 +39,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: #020107 url('assets/img/Profile.jpg') center center / contain no-repeat;
+  background: #020107 url('assets/img/Profile.jpg') left center / 33.333% auto repeat-x;
   pointer-events: none;
 }
 /* 薄暗霧 */
