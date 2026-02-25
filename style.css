@@ -25,10 +25,6 @@
 html {
   scroll-behavior: smooth;
   background-color: #020107;
-  background-image: url('assets/img/site-bg.svg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
 }
 body {
   font-family: var(--ff-sans);
@@ -36,6 +32,15 @@ body {
   color: var(--fg);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ── 固定底圖層（position:fixed div，完整跨瀏覽器） ── */
+#site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #020107 url('assets/img/site-bg.svg') center / cover no-repeat;
+  pointer-events: none;
 }
 a { color: inherit; }
 img { display: block; max-width: 100%; }
@@ -343,8 +348,8 @@ img { display: block; max-width: 100%; }
 .btn.small { padding: 9px 16px; font-size: 13px; }
 
 /* ── Sections ───────────────────────────────── */
-.section     { padding: 110px 0; background: rgba(7, 8, 14, .88); }
-.section-alt { background: rgba(13, 15, 26, .92); }
+.section     { padding: 110px 0; background: rgba(7, 8, 14, .82); }
+.section-alt { background: rgba(13, 15, 26, .87); }
 .section-inner {
   max-width: 1100px;
   margin: 0 auto;
