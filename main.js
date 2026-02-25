@@ -330,22 +330,29 @@ if (eyebrow) typewriter(eyebrow, "Dream Don't Come or Go");
   }
 })();
 
-// ── Reveal 捲動動畫 ──────────────────────────
+// ── Reveal 捲動動畫（淡入 + 淡出雙向） ──────
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
-      // grid 子項目錯開進場
       e.target.querySelectorAll('.gallery-item, .contact-card').forEach((child, i) => {
         child.style.transitionDelay = `${i * 0.08}s`;
         child.classList.add('visible');
       });
-      revealObserver.unobserve(e.target);
+    } else {
+      e.target.classList.remove('visible');
+      e.target.querySelectorAll('.gallery-item, .contact-card').forEach(child => {
+        child.style.transitionDelay = '0s';
+        child.classList.remove('visible');
+      });
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.1 });
 
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+// 延遲一幀，確保 opacity:0 的初始狀態先渲染，才開始監聽
+setTimeout(() => {
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}, 60);
 
 // ── 音樂播放器 ───────────────────────────────
 const audio        = document.getElementById('audio-el');

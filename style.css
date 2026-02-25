@@ -42,12 +42,22 @@ body {
   background: #020107 url('assets/img/Profile.jpg') center center / contain no-repeat;
   pointer-events: none;
 }
-/* 讓底圖帶點暗霧感，避免過於搶眼 */
+/* 薄暗霧 */
+#site-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 1, 7, 0.22);
+  z-index: 1;
+}
+/* 星雲 / 星點疊層 */
 #site-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(2, 1, 7, 0.38);
+  background: url('assets/img/site-bg.svg') center / cover;
+  opacity: 0.5;
+  z-index: 2;
 }
 a { color: inherit; }
 img { display: block; max-width: 100%; }
@@ -358,7 +368,7 @@ img { display: block; max-width: 100%; }
 main { padding: 70px 0 80px; }
 
 /* 區塊間留間距，讓底圖隱隱透出 */
-.section     { padding: 110px 0; background: rgba(7, 8, 14, .95); margin-bottom: 64px; }
+.section     { padding: 84px 0; background: rgba(7, 8, 14, .95); margin-bottom: 64px; }
 .section-alt { background: rgba(13, 15, 26, .96); }
 .section:last-child { margin-bottom: 0; }
 .section-inner {
@@ -1003,7 +1013,7 @@ h2 {
   .hero-title      { font-size: 52px; }
   .hero-content    { padding: 110px 20px 80px; }
   main             { padding: 40px 0 60px; }
-  .section         { padding: 80px 0; margin-bottom: 40px; }
+  .section         { padding: 62px 0; margin-bottom: 40px; }
   h2               { margin-bottom: 36px; }
   .player-art      { max-width: 160px; }
   .gallery-grid    { gap: 8px; }
