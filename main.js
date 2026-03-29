@@ -358,24 +358,19 @@ setTimeout(() => {
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }, 60);
 
-// ── 捲動換底圖 ────────────────────────────────
-const BG_MAP = {
-  hero:    "url('assets/img/page2.jpg')",
-  music:   "url('assets/img/page2.jpg')",
-  about:   "url('assets/img/page2.jpg')",
-  gallery: "url('assets/img/outro.jpg')",
-  contact: "url('assets/img/outro.jpg')",
-};
+// ── 捲動方向換底圖（往下→第一張，往上→第二張） ──
+const BG_DOWN = "url('assets/img/page2.jpg')";
+const BG_UP   = "url('assets/img/outro.jpg')";
 
 const bgA = document.getElementById('bg-a');
 const bgB = document.getElementById('bg-b');
-let bgActive  = bgA; // 目前顯示的層
-let bgPending = bgB; // 準備淡入的層
-let bgCurrent = ''; // 目前圖片 url
+let bgActive  = bgA;
+let bgPending = bgB;
+let bgCurrent = '';
 
-// 初始化：直接設定封面圖，不播動畫
-bgA.style.backgroundImage = BG_MAP.hero;
-bgCurrent = BG_MAP.hero;
+// 初始化：直接顯示第一張，不播動畫
+bgA.style.backgroundImage = BG_DOWN;
+bgCurrent = BG_DOWN;
 
 function changeBg(url) {
   if (url === bgCurrent) return;
@@ -386,27 +381,18 @@ function changeBg(url) {
   [bgActive, bgPending] = [bgPending, bgActive];
 }
 
-const bgObserver = new IntersectionObserver(entries => {
-  // 找出目前畫面中可見比例最高的那個區塊
-  let best = null, bestRatio = 0;
-  entries.forEach(e => {
-    if (e.intersectionRatio > bestRatio) {
-      bestRatio = e.intersectionRatio;
-      best = e.target;
-    }
-  });
-  if (best) {
-    const key = best.id || (best.classList.contains('hero') ? 'hero' : null);
-    if (key && BG_MAP[key]) changeBg(BG_MAP[key]);
-  }
-}, { threshold: [0.2, 0.4, 0.6] });
+let lastScrollY = window.scrollY;
+let scrollDir   = 'down';
 
-// 監聽 hero + 四個內容區塊
-document.querySelector('.hero') && bgObserver.observe(document.querySelector('.hero'));
-['music', 'about', 'gallery', 'contact'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) bgObserver.observe(el);
-});
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > lastScrollY + 6) {
+    if (scrollDir !== 'down') { scrollDir = 'down'; changeBg(BG_DOWN); }
+  } else if (y < lastScrollY - 6) {
+    if (scrollDir !== 'up') { scrollDir = 'up'; changeBg(BG_UP); }
+  }
+  lastScrollY = y;
+}, { passive: true });
 
 // ── 音樂播放器 ───────────────────────────────
 const audio        = document.getElementById('audio-el');
