@@ -375,7 +375,7 @@ let bgActive  = bgA;
 let bgPending = bgB;
 let bgCurrent = '';
 
-// 初始化：直接顯示第一張，不播動畫
+// 初始化：進入時先顯示 page2，不播動畫
 bgA.style.backgroundImage = BG_DOWN;
 bgCurrent = BG_DOWN;
 
