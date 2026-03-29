@@ -24,7 +24,14 @@ function dismissLoader() {
     loader.classList.add('fading');
     setTimeout(() => {
       loader.classList.add('done');
-      setTimeout(() => { loader.remove(); }, 1100);
+      setTimeout(() => {
+        loader.remove();
+        // 給 iOS 400ms 緩衝，避免 loader 消失後的殘留事件誤觸發換圖
+        setTimeout(() => {
+          lastScrollY = window.scrollY;
+          bgLocked    = false;
+        }, 400);
+      }, 1100);
     }, 450);
   }, 500);
 }
@@ -383,6 +390,7 @@ function changeBg(url) {
 
 let lastScrollY = window.scrollY;
 let scrollDir   = 'down';
+let bgLocked    = true; // loader 消失 + 緩衝期結束前鎖定，防止誤觸
 
 function applyScrollDir(dir) {
   if (dir !== scrollDir) {
@@ -393,7 +401,7 @@ function applyScrollDir(dir) {
 
 // 電腦版：scroll 事件
 window.addEventListener('scroll', () => {
-  if (document.getElementById('loader')) return; // loader 存在時忽略
+  if (bgLocked) return;
   const y = window.scrollY;
   if      (y > lastScrollY + 6) applyScrollDir('down');
   else if (y < lastScrollY - 6) applyScrollDir('up');
@@ -406,9 +414,9 @@ window.addEventListener('touchstart', e => {
   touchStartY = e.touches[0].clientY;
 }, { passive: true });
 window.addEventListener('touchend', e => {
-  if (document.getElementById('loader')) return; // loader 存在時忽略
+  if (bgLocked) return;
   const diff = touchStartY - e.changedTouches[0].clientY;
-  if (Math.abs(diff) > 25) applyScrollDir(diff > 0 ? 'down' : 'up');
+  if (Math.abs(diff) > 30) applyScrollDir(diff > 0 ? 'down' : 'up');
 }, { passive: true });
 
 // ── 音樂播放器 ───────────────────────────────
