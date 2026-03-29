@@ -384,14 +384,29 @@ function changeBg(url) {
 let lastScrollY = window.scrollY;
 let scrollDir   = 'down';
 
+function applyScrollDir(dir) {
+  if (dir !== scrollDir) {
+    scrollDir = dir;
+    changeBg(dir === 'down' ? BG_DOWN : BG_UP);
+  }
+}
+
+// 電腦版：scroll 事件
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
-  if (y > lastScrollY + 6) {
-    if (scrollDir !== 'down') { scrollDir = 'down'; changeBg(BG_DOWN); }
-  } else if (y < lastScrollY - 6) {
-    if (scrollDir !== 'up') { scrollDir = 'up'; changeBg(BG_UP); }
-  }
+  if      (y > lastScrollY + 6) applyScrollDir('down');
+  else if (y < lastScrollY - 6) applyScrollDir('up');
   lastScrollY = y;
+}, { passive: true });
+
+// 手機版：touch 事件（iOS Safari scroll 事件不可靠）
+let touchStartY = 0;
+window.addEventListener('touchstart', e => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+window.addEventListener('touchend', e => {
+  const diff = touchStartY - e.changedTouches[0].clientY;
+  if (Math.abs(diff) > 25) applyScrollDir(diff > 0 ? 'down' : 'up');
 }, { passive: true });
 
 // ── 音樂播放器 ───────────────────────────────
