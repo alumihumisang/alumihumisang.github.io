@@ -360,7 +360,7 @@ setTimeout(() => {
 
 // ── 捲動換底圖 ────────────────────────────────
 const BG_MAP = {
-  hero:    "url('assets/img/cover.jpg')",
+  hero:    "url('assets/img/page2.jpg')",
   music:   "url('assets/img/page2.jpg')",
   about:   "url('assets/img/page2.jpg')",
   gallery: "url('assets/img/outro.jpg')",
