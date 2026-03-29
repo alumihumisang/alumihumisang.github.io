@@ -393,6 +393,7 @@ function applyScrollDir(dir) {
 
 // 電腦版：scroll 事件
 window.addEventListener('scroll', () => {
+  if (document.getElementById('loader')) return; // loader 存在時忽略
   const y = window.scrollY;
   if      (y > lastScrollY + 6) applyScrollDir('down');
   else if (y < lastScrollY - 6) applyScrollDir('up');
@@ -405,6 +406,7 @@ window.addEventListener('touchstart', e => {
   touchStartY = e.touches[0].clientY;
 }, { passive: true });
 window.addEventListener('touchend', e => {
+  if (document.getElementById('loader')) return; // loader 存在時忽略
   const diff = touchStartY - e.changedTouches[0].clientY;
   if (Math.abs(diff) > 25) applyScrollDir(diff > 0 ? 'down' : 'up');
 }, { passive: true });
