@@ -21,8 +21,11 @@
 </head>
 <body>
 
-  <!-- 固定底圖層 -->
-  <div id="site-bg" aria-hidden="true"></div>
+  <!-- 固定底圖層（雙層交叉淡入淡出） -->
+  <div id="site-bg" aria-hidden="true">
+    <div class="bg-layer" id="bg-a"></div>
+    <div class="bg-layer" id="bg-b"></div>
+  </div>
 
   <!-- 底噪質感疊層 -->
   <div class="grain" aria-hidden="true"></div>

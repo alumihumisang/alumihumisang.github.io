@@ -39,16 +39,28 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: #020107 url('assets/img/Profile.jpg') left center / 33.333% auto repeat-x;
+  background: #020107;
   pointer-events: none;
 }
+/* 底圖雙層（交替淡入淡出） */
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  background-color: #020107;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: opacity 1.2s ease;
+}
+#bg-a { z-index: 1; }
+#bg-b { z-index: 2; opacity: 0; }
 /* 薄暗霧 */
 #site-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(2, 1, 7, 0.22);
-  z-index: 1;
+  background: rgba(2, 1, 7, 0.25);
+  z-index: 3;
 }
 /* 星雲 / 星點疊層 */
 #site-bg::after {
@@ -56,8 +68,8 @@ body {
   position: absolute;
   inset: 0;
   background: url('assets/img/site-bg.svg') center / cover;
-  opacity: 0.5;
-  z-index: 2;
+  opacity: 0.45;
+  z-index: 4;
 }
 a { color: inherit; }
 img { display: block; max-width: 100%; }

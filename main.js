@@ -358,6 +358,56 @@ setTimeout(() => {
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }, 60);
 
+// ── 捲動換底圖 ────────────────────────────────
+const BG_MAP = {
+  hero:    "url('assets/img/cover.jpg')",
+  music:   "url('assets/img/page2.jpg')",
+  about:   "url('assets/img/page2.jpg')",
+  gallery: "url('assets/img/outro.jpg')",
+  contact: "url('assets/img/outro.jpg')",
+};
+
+const bgA = document.getElementById('bg-a');
+const bgB = document.getElementById('bg-b');
+let bgActive  = bgA; // 目前顯示的層
+let bgPending = bgB; // 準備淡入的層
+let bgCurrent = ''; // 目前圖片 url
+
+// 初始化：直接設定封面圖，不播動畫
+bgA.style.backgroundImage = BG_MAP.hero;
+bgCurrent = BG_MAP.hero;
+
+function changeBg(url) {
+  if (url === bgCurrent) return;
+  bgCurrent = url;
+  bgPending.style.backgroundImage = url;
+  bgPending.style.opacity = '1';
+  bgActive.style.opacity  = '0';
+  [bgActive, bgPending] = [bgPending, bgActive];
+}
+
+const bgObserver = new IntersectionObserver(entries => {
+  // 找出目前畫面中可見比例最高的那個區塊
+  let best = null, bestRatio = 0;
+  entries.forEach(e => {
+    if (e.intersectionRatio > bestRatio) {
+      bestRatio = e.intersectionRatio;
+      best = e.target;
+    }
+  });
+  if (best) {
+    const key = best.id || (best.classList.contains('hero') ? 'hero' : null);
+    if (key && BG_MAP[key]) changeBg(BG_MAP[key]);
+  }
+}, { threshold: [0.2, 0.4, 0.6] });
+
+// 監聽 hero + 四個內容區塊
+document.querySelector('.hero') && bgObserver.observe(document.querySelector('.hero'));
+['music', 'about', 'gallery', 'contact'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) bgObserver.observe(el);
+});
+
 // ── 音樂播放器 ───────────────────────────────
 const audio        = document.getElementById('audio-el');
 const playerCard   = document.getElementById('player-card');
