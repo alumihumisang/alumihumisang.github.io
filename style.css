@@ -1028,6 +1028,8 @@ h2 {
   .section         { padding: 62px 0; margin-bottom: 80px; background: rgba(7, 8, 14, .68); }
   .section-alt     { background: rgba(13, 15, 26, .72); }
   h2               { margin-bottom: 36px; }
+  /* 手機底圖縮小顯示全圖，不裁切邊角 */
+  .bg-layer        { background-size: contain; background-position: center center; }
   .player-art      { max-width: 160px; }
   .gallery-grid    { gap: 8px; }
 }
