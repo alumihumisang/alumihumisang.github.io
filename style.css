@@ -122,6 +122,11 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
 }
+.brand-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
 .brand {
   font-family: var(--ff-serif);
   font-size: 18px;
@@ -991,7 +996,7 @@ h2 {
   .gallery-grid    { grid-template-columns: repeat(2, 1fr); }
   .contact-grid    { grid-template-columns: 1fr; }
   .about-grid      { grid-template-columns: 1fr; }
-  .about-photo     { order: -1; max-width: 110px; margin-bottom: 12px; }
+  .about-photo     { order: -1; max-width: 200px; margin-bottom: 16px; }
   .player-card     { grid-template-columns: 1fr; }
   .player-art      { max-width: 200px; }
 }
