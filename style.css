@@ -1020,7 +1020,7 @@ h2 {
   .hero-title      { font-size: 52px; }
   .hero-content    { padding: 110px 20px 80px; }
   main             { padding: 60px 0 80px; }
-  .section         { padding: 62px 0; margin-bottom: 80px; background: rgba(7, 8, 14, .68); scroll-margin-top: 95px; }
+  .section         { padding: 62px 0; margin-bottom: 80px; background: rgba(7, 8, 14, .68); scroll-margin-top: 80px; }
   .section-alt     { background: rgba(13, 15, 26, .72); }
   h2               { margin-bottom: 36px; }
   .bg-layer        { background-size: cover; }
