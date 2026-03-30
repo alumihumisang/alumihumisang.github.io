@@ -583,10 +583,7 @@ h2 {
 .about-val { color: var(--fg); }
 .about-photo img {
   width: 100%;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  object-fit: cover;
-  aspect-ratio: 3/4;
+  object-fit: contain;
 }
 
 /* ── Gallery ────────────────────────────────── */
@@ -994,7 +991,7 @@ h2 {
   .gallery-grid    { grid-template-columns: repeat(2, 1fr); }
   .contact-grid    { grid-template-columns: 1fr; }
   .about-grid      { grid-template-columns: 1fr; }
-  .about-photo     { order: -1; max-width: 360px; }
+  .about-photo     { order: -1; max-width: 110px; margin-bottom: 12px; }
   .player-card     { grid-template-columns: 1fr; }
   .player-art      { max-width: 200px; }
 }
