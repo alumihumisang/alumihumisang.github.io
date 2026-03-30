@@ -117,7 +117,7 @@ img { display: block; max-width: 100%; }
 .nav-inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 20px 24px;
+  padding: 10px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -385,7 +385,7 @@ img { display: block; max-width: 100%; }
 main { padding: 90px 0 100px; }
 
 /* 錨點跳轉時，標題不被 nav 遮住 */
-.section { scroll-margin-top: 130px; }
+.section { scroll-margin-top: 140px; }
 
 /* 區塊間留間距，讓底圖隱隱透出 */
 .section     { padding: 84px 0; background: rgba(7, 8, 14, .38); margin-bottom: 100px; }
@@ -1008,15 +1008,16 @@ h2 {
 @media (max-width: 600px) {
   /* 手機版直接顯示導覽連結，不用漢堡選單 */
   .hamburger   { display: none; }
-  .nav-inner   { flex-wrap: nowrap; align-items: center; padding: 10px 16px; }
-  .brand-logo  { height: 36px; }
+  .nav          { background: rgba(7,8,14,.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-color: var(--border); }
+  .nav-inner   { flex-wrap: nowrap; align-items: center; padding: 8px 16px; }
+  .brand-logo  { height: 72px; }
   .nav-links   { display: flex; gap: 0; }
   .nav-links a { margin-left: 14px; font-size: 11px; }
 
   .hero-title      { font-size: 52px; }
   .hero-content    { padding: 110px 20px 80px; }
   main             { padding: 60px 0 80px; }
-  .section         { padding: 62px 0; margin-bottom: 80px; background: rgba(7, 8, 14, .68); scroll-margin-top: 70px; }
+  .section         { padding: 62px 0; margin-bottom: 80px; background: rgba(7, 8, 14, .68); scroll-margin-top: 95px; }
   .section-alt     { background: rgba(13, 15, 26, .72); }
   h2               { margin-bottom: 36px; }
   .bg-layer        { background-size: cover; }
