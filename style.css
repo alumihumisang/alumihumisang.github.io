@@ -47,7 +47,7 @@ body {
   position: absolute;
   inset: 0;
   background-color: #020107;
-  background-size: contain;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   transition: opacity 1.2s ease;
@@ -1025,7 +1025,8 @@ h2 {
   .hero-title      { font-size: 52px; }
   .hero-content    { padding: 110px 20px 80px; }
   main             { padding: 60px 0 80px; }
-  .section         { padding: 62px 0; margin-bottom: 64px; }
+  .section         { padding: 62px 0; margin-bottom: 64px; background: rgba(7, 8, 14, .78); }
+  .section-alt     { background: rgba(13, 15, 26, .82); }
   h2               { margin-bottom: 36px; }
   .player-art      { max-width: 160px; }
   .gallery-grid    { gap: 8px; }
