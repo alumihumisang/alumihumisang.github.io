@@ -279,9 +279,16 @@ window.addEventListener('scroll', () => {
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('nav-links');
 
+const navEl = document.getElementById('nav');
+
 hamburger?.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   navLinks.classList.toggle('open');
+  // 開啟選單時暫時移除 backdrop-filter，
+  // 避免 iOS Safari 把子層 position:fixed 的基準變成 nav 而非 viewport
+  const isOpen = navLinks.classList.contains('open');
+  navEl.style.backdropFilter       = isOpen ? 'none' : '';
+  navEl.style.webkitBackdropFilter = isOpen ? 'none' : '';
 });
 
 // 點選任一選單連結後收合
@@ -289,6 +296,8 @@ navLinks?.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     hamburger.classList.remove('open');
     navLinks.classList.remove('open');
+    navEl.style.backdropFilter       = '';
+    navEl.style.webkitBackdropFilter = '';
   });
 });
 

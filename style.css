@@ -384,6 +384,9 @@ img { display: block; max-width: 100%; }
 /* ── Sections ───────────────────────────────── */
 main { padding: 90px 0 100px; }
 
+/* 錨點跳轉時，標題不被 nav 遮住 */
+.section { scroll-margin-top: 160px; }
+
 /* 區塊間留間距，讓底圖隱隱透出 */
 .section     { padding: 84px 0; background: rgba(7, 8, 14, .38); margin-bottom: 100px; }
 .section-alt { background: rgba(13, 15, 26, .42); }
@@ -1028,7 +1031,7 @@ h2 {
   .hero-title      { font-size: 52px; }
   .hero-content    { padding: 110px 20px 80px; }
   main             { padding: 60px 0 80px; }
-  .section         { padding: 62px 0; margin-bottom: 80px; background: rgba(7, 8, 14, .68); }
+  .section         { padding: 62px 0; margin-bottom: 80px; background: rgba(7, 8, 14, .68); scroll-margin-top: 136px; }
   .section-alt     { background: rgba(13, 15, 26, .72); }
   h2               { margin-bottom: 36px; }
   .bg-layer        { background-size: cover; }
