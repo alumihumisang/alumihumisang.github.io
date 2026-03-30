@@ -366,8 +366,8 @@ setTimeout(() => {
 }, 60);
 
 // ── 捲動方向換底圖（往下→第一張，往上→第二張） ──
-const BG_DOWN = "url('assets/img/page2.jpg')";
-const BG_UP   = "url('assets/img/outro.jpg')";
+const BG_DOWN = "url('assets/img/coverrr.jpg')";
+const BG_UP   = "url('assets/img/coverrr.jpg')";
 
 const bgA = document.getElementById('bg-a');
 const bgB = document.getElementById('bg-b');
@@ -375,7 +375,7 @@ let bgActive  = bgA;
 let bgPending = bgB;
 let bgCurrent = '';
 
-// 初始化：進入時先顯示 page2，不播動畫
+// 初始化：進入時顯示底圖，不播動畫
 bgA.style.backgroundImage = BG_DOWN;
 bgCurrent = BG_DOWN;
 
