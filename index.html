@@ -37,14 +37,15 @@
       <button class="hamburger" id="hamburger" aria-label="選單">
         <span></span><span></span><span></span>
       </button>
-      <div class="nav-links" id="nav-links">
-        <a href="#music" data-i18n="nav-music">音樂</a>
-        <a href="#about" data-i18n="nav-about">介紹</a>
-        <a href="#gallery" data-i18n="nav-gallery">Gallery</a>
-        <a href="#contact" data-i18n="nav-contact">聯絡</a>
-      </div>
     </div>
   </nav>
+  <!-- nav-links 移到 nav 外面，避免 backdrop-filter 造成 iOS fixed 定位錯誤 -->
+  <div class="nav-links" id="nav-links">
+    <a href="#music" data-i18n="nav-music">音樂</a>
+    <a href="#about" data-i18n="nav-about">介紹</a>
+    <a href="#gallery" data-i18n="nav-gallery">Gallery</a>
+    <a href="#contact" data-i18n="nav-contact">聯絡</a>
+  </div>
 
   <!-- Hero -->
   <header class="hero">
