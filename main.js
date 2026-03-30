@@ -298,6 +298,10 @@ navLinks?.querySelectorAll('a').forEach(a => {
     navLinks.classList.remove('open');
     navEl.style.backdropFilter       = '';
     navEl.style.webkitBackdropFilter = '';
+    // 跳轉時先讓所有區塊可見，避免快速捲動時產生殘影
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    revealLocked = true;
+    setTimeout(() => { revealLocked = false; }, 1000);
   });
 });
 
@@ -351,6 +355,8 @@ if (eyebrow) typewriter(eyebrow, "Dream Don't Come or Go");
 })();
 
 // ── Reveal 捲動動畫（淡入 + 淡出雙向） ──────
+let revealLocked = false; // 跳轉時暫停淡出，避免殘影
+
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -359,7 +365,7 @@ const revealObserver = new IntersectionObserver(entries => {
         child.style.transitionDelay = `${i * 0.08}s`;
         child.classList.add('visible');
       });
-    } else {
+    } else if (!revealLocked) {
       e.target.classList.remove('visible');
       e.target.querySelectorAll('.gallery-item, .contact-card').forEach(child => {
         child.style.transitionDelay = '0s';
