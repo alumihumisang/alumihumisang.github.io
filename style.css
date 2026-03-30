@@ -568,7 +568,7 @@ h2 {
 /* ── About ──────────────────────────────────── */
 .about-grid {
   display: grid;
-  grid-template-columns: 1.8fr .35fr;
+  grid-template-columns: 1.8fr .55fr;
   gap: 70px;
   align-items: start;
 }
@@ -1002,7 +1002,7 @@ h2 {
   .gallery-grid    { grid-template-columns: repeat(2, 1fr); }
   .contact-grid    { grid-template-columns: 1fr; }
   .about-grid      { grid-template-columns: 1fr; }
-  .about-photo     { order: -1; max-width: 200px; margin: 0 auto 16px; justify-self: center; }
+  .about-photo     { order: -1; max-width: 280px; width: 100%; margin: 0 auto 16px; justify-self: center; text-align: center; }
   .brand-logo      { height: 96px; }
   .player-card     { grid-template-columns: 1fr; }
   .player-art      { max-width: 200px; }
