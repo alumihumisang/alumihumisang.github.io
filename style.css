@@ -617,6 +617,12 @@ h2 {
   transition: transform .6s ease;
 }
 .gallery-item:hover img { transform: scale(1.06); }
+.gallery-item--featured {
+  grid-column: span 2;
+}
+.gallery-item--featured img {
+  height: 340px;
+}
 
 /* Lightbox */
 .lightbox {
