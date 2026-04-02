@@ -126,7 +126,8 @@ img { display: block; max-width: 100%; }
   justify-content: space-between;
 }
 .brand-logo {
-  height: 112px;
+  max-height: 112px;
+  height: auto;
   width: auto;
   display: block;
 }
@@ -1042,7 +1043,7 @@ h2 {
   .merch-row .merch-item:nth-child(3) img,
   .merch-row .merch-item:nth-child(4) img { height: 120px; }
   .about-photo     { order: -1; max-width: 280px; width: 100%; margin: 0 auto 16px; justify-self: center; text-align: center; }
-  .brand-logo      { height: 96px; }
+  .brand-logo      { max-height: 96px; height: auto; }
   .player-card     { grid-template-columns: 1fr; }
   .player-art      { max-width: 200px; }
 }
@@ -1052,7 +1053,7 @@ h2 {
   .hamburger   { display: none; }
   .nav          { background: rgba(7,8,14,.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-color: var(--border); }
   .nav-inner   { flex-wrap: nowrap; align-items: center; padding: 8px 16px; }
-  .brand-logo  { height: 72px; }
+  .brand-logo  { max-height: 72px; height: auto; }
   .nav-links   { display: flex; gap: 0; }
   .nav-links a { margin-left: 14px; font-size: 11px; }
 

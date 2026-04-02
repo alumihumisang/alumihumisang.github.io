@@ -36,6 +36,10 @@ function dismissLoader() {
   }, 500);
 }
 
+// ── localStorage 安全包裝（iOS Safari 無痕模式 quota=0 會 throw） ──
+function safeLSGet(k)    { try { return localStorage.getItem(k); }    catch(e) { return null; } }
+function safeLSSet(k, v) { try { localStorage.setItem(k, v); }        catch(e) {} }
+
 // ── 多語言翻譯 ───────────────────────────────
 const translations = {
   zh: {
@@ -92,7 +96,7 @@ function applyLang(lang) {
     if (v !== undefined) el.innerHTML = v;
   });
   document.documentElement.lang = {zh:'zh-Hant',en:'en',ja:'ja'}[lang] || 'zh-Hant';
-  localStorage.setItem('lang', lang);
+  safeLSSet('lang', lang);
   requestAnimationFrame(syncMarqueeWidth); // 文字換了就立刻重新對齊
 }
 
@@ -101,7 +105,7 @@ function applyLang(lang) {
   const pickBtns = document.querySelectorAll('.ldr-pick-btn');
 
   // 偵測瀏覽器語言或讀取已儲存選擇
-  const saved = localStorage.getItem('lang');
+  const saved = safeLSGet('lang');
   let detected = 'zh';
   if (!saved) {
     const nav = (navigator.language || '').toLowerCase();
@@ -497,7 +501,8 @@ audio.addEventListener('ended', () => {
 // 播放 / 暫停按鈕
 btnPlay?.addEventListener('click', () => {
   if (audio.paused) {
-    audio.play();
+    const p = audio.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
     iconPlay.style.display  = 'none';
     iconPause.style.display = '';
     playerCard.classList.add('playing');
