@@ -531,7 +531,7 @@ function seekToX(clientX) {
   audio.currentTime = pct * audio.duration;
 }
 
-progressBar?.addEventListener('mousedown', e => { isDragging = true; seekToX(e.clientX); });
+progressBar?.addEventListener('mousedown', e => { e.preventDefault(); isDragging = true; seekToX(e.clientX); });
 document.addEventListener('mousemove', e => { if (isDragging) seekToX(e.clientX); });
 document.addEventListener('mouseup', () => { isDragging = false; });
 

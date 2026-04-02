@@ -507,6 +507,8 @@ h2 {
   position: relative;
   height: 3px;
   background: var(--border);
+  user-select: none;
+  -webkit-user-select: none;
   border-radius: 99px;
   cursor: pointer;
   margin-bottom: 8px;
