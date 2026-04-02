@@ -48,6 +48,7 @@ const translations = {
     'nav-merch':'手作','sec-merch':'MERCH','h-merch':'迷你手作',
     'sec-contact':'CONTACT','h-contact':'聯絡 / 演出邀約',
     'c-email':'Email','c-ig':'Instagram','c-yt':'YouTube',
+    'about-body':'你說人生如戲我說夢已如來<br />你說 電是靜止或移動 我說電是兒童<br />夢已經來或沒來了<br />我們還在這邊耍白痴<br />最接近電子的時刻<br />已經夢遺或是我是阿姨<br />樂團一直在這mono synth還在尋找他的衛星',
     'eyebrow':"Dream Don't Come or Go",
   },
   en: {
@@ -59,7 +60,7 @@ const translations = {
     'sec-gallery':'GALLERY','h-gallery':'Gallery',
     'nav-merch':'Merch','sec-merch':'MERCH','h-merch':'Handmade Mini',
     'sec-contact':'CONTACT','h-contact':'Contact / Booking',
-    'c-email':'Email','c-ig':'Instagram','c-yt':'YouTube',
+    'about-body':'You say life is a play — I say the dream is already here.<br />You ask if electricity stands still or moves — I say electricity is a child.<br />Did the dream come? Has it not come yet?<br />Either way, we\'re still here, fooling around.<br />The moment closest to the electron —<br />is it the afterimage of a dream,<br />or have I simply become someone\'s aunt?<br />The band is still here. The mono synth is still searching for its satellite.',
     'eyebrow':"Dream Don't Come or Go",
   },
   ja: {
@@ -71,6 +72,7 @@ const translations = {
     'sec-gallery':'GALLERY','h-gallery':'ギャラリー',
     'nav-merch':'グッズ','sec-merch':'MERCH','h-merch':'ミニ手作り',
     'sec-contact':'CONTACT','h-contact':'連絡 / ライブ依頼',
+    'about-body':'君は「人生は芝居だ」と言う<br />僕は「夢はもう来ている」と言う<br /><br />君は「電は止まっているのか、動いているのか」と言う<br />僕は「電は子どもだ」と言う<br /><br />夢は来たのか　まだ来ていないのか<br />それでも僕らはここでふざけている<br /><br />電子にいちばん近づく瞬間<br />それは夢の残像なのか<br />それとも僕はもうおばさんなのか<br /><br />バンドはずっとここにいる<br />mono synth はまだ 自分の衛星を探している',
     'c-email':'メール','c-ig':'Instagram','c-yt':'YouTube',
     'eyebrow':"Dream Don't Come or Go",
   },
@@ -81,6 +83,10 @@ function applyLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const v = t[el.dataset.i18n];
     if (v !== undefined) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const v = t[el.dataset.i18nHtml];
+    if (v !== undefined) el.innerHTML = v;
   });
   document.documentElement.lang = {zh:'zh-Hant',en:'en',ja:'ja'}[lang] || 'zh-Hant';
   localStorage.setItem('lang', lang);
