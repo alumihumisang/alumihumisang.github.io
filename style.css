@@ -663,13 +663,12 @@ h2 {
 /* ── Merch ──────────────────────────────────── */
 .merch-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
-  align-items: center;
 }
 .merch-item img {
   width: 100%;
-  height: 200px;
+  height: 280px;
   object-fit: cover;
   border-radius: 4px;
   display: block;
@@ -677,7 +676,12 @@ h2 {
 .merch-item--nobg img {
   object-fit: contain;
   background: transparent;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,.5));
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.55));
+}
+/* 第二列較矮 */
+.merch-row .merch-item:nth-child(3) img,
+.merch-row .merch-item:nth-child(4) img {
+  height: 180px;
 }
 
 /* ── Contact ────────────────────────────────── */
@@ -1022,8 +1026,10 @@ h2 {
   .gallery-grid    { grid-template-columns: repeat(2, 1fr); }
   .contact-grid    { grid-template-columns: 1fr; }
   .about-grid      { grid-template-columns: 1fr; }
-  .merch-row       { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .merch-item img  { height: 150px; }
+  .merch-row       { gap: 10px; }
+  .merch-item img  { height: 160px; }
+  .merch-row .merch-item:nth-child(3) img,
+  .merch-row .merch-item:nth-child(4) img { height: 120px; }
   .about-photo     { order: -1; max-width: 280px; width: 100%; margin: 0 auto 16px; justify-self: center; text-align: center; }
   .brand-logo      { height: 96px; }
   .player-card     { grid-template-columns: 1fr; }
