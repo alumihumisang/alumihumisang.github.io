@@ -606,6 +606,7 @@ h2 {
 .gallery-item {
   overflow: hidden;
   border-radius: 12px;
+  aspect-ratio: 4 / 3;
   border: 1px solid var(--border);
   aspect-ratio: 3/4;
   cursor: zoom-in;
