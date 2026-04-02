@@ -482,8 +482,10 @@ function updateDuration() {
 audio.addEventListener('loadedmetadata', updateDuration);
 audio.addEventListener('durationchange', updateDuration);
 
-// 更新進度條
+// 更新進度條（拖曳期間暫停，避免 timeupdate 蓋回視覺位置）
+let isSeeking = false;
 audio.addEventListener('timeupdate', () => {
+  if (isSeeking) return;
   const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
   setProgress(pct);
   timeCurrent.textContent = formatTime(audio.currentTime);
@@ -531,6 +533,7 @@ if (progressBar) {
   progressBar.addEventListener('pointerdown', e => {
     e.preventDefault();
     isDragging = true;
+    isSeeking  = true;
     progressBar.setPointerCapture(e.pointerId);
     seekToX(e.clientX);
   });
@@ -544,10 +547,15 @@ if (progressBar) {
     if (!isDragging) return;
     isDragging = false;
     seekToX(e.clientX);
+    // 等 seeked 事件確認 seek 完成後才放開 timeupdate
+    audio.addEventListener('seeked', () => { isSeeking = false; }, { once: true });
+    // 保險：3 秒後強制放開
+    setTimeout(() => { isSeeking = false; }, 3000);
   });
 
   progressBar.addEventListener('pointercancel', () => {
     isDragging = false;
+    isSeeking  = false;
   });
 }
 
