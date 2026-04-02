@@ -513,6 +513,11 @@ h2 {
   cursor: pointer;
   margin-bottom: 8px;
 }
+.player-progress::before {
+  content: '';
+  position: absolute;
+  inset: -16px 0;
+}
 .player-progress:hover { height: 4px; }
 .player-progress-fill {
   height: 100%;
