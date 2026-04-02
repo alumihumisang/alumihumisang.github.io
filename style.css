@@ -621,6 +621,7 @@ h2 {
 .gallery-item--featured {
   grid-column: span 2;
   aspect-ratio: 16 / 9;
+  border-radius: 0;
 }
 .gallery-item--featured img {
   height: 100%;
