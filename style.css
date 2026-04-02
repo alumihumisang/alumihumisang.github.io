@@ -516,7 +516,7 @@ h2 {
 .player-progress::before {
   content: '';
   position: absolute;
-  inset: -16px 0;
+  inset: -20px 0;
 }
 .player-progress:hover { height: 4px; }
 .player-progress-fill {
