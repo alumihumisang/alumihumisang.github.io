@@ -39,7 +39,7 @@ function dismissLoader() {
 // ── 多語言翻譯 ───────────────────────────────
 const translations = {
   zh: {
-    'nav-music':'音樂','nav-about':'介紹','nav-gallery':'Gallery','nav-contact':'聯絡',
+    'nav-music':'音樂','nav-about':'介紹','nav-gallery':'影像','nav-contact':'聯絡',
     'btn-listen':'▶ 立即收聽','btn-contact':'聯絡我們',
     'marquee':'最新單曲《春夏秋冬》上線',
     'sec-music':'MUSIC','h-music':'最新單曲','btn-dl':'↓ 下載 MP3',
