@@ -514,14 +514,8 @@ btnPlay?.addEventListener('click', () => {
   }
 });
 
-// 點擊進度條跳轉
-progressBar?.addEventListener('click', e => {
-  if (!audio.duration) return;
-  const rect = progressBar.getBoundingClientRect();
-  audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
-});
-
-// 拖曳進度條（滑鼠 + 觸控）
+// 拖曳進度條（Pointer Events：滑鼠 + 觸控 + Stylus 一次搞定）
+// setPointerCapture 確保拖出範圍後仍持續追蹤，解決 Mac 上丟失問題
 let isDragging = false;
 
 function seekToX(clientX) {
@@ -531,19 +525,29 @@ function seekToX(clientX) {
   audio.currentTime = pct * audio.duration;
 }
 
-progressBar?.addEventListener('mousedown', e => { e.preventDefault(); isDragging = true; seekToX(e.clientX); });
-document.addEventListener('mousemove', e => { if (isDragging) seekToX(e.clientX); });
-document.addEventListener('mouseup', () => { isDragging = false; });
+if (progressBar) {
+  progressBar.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    isDragging = true;
+    progressBar.setPointerCapture(e.pointerId);
+    seekToX(e.clientX);
+  });
 
-// 觸控支援
-progressBar?.addEventListener('touchstart', e => {
-  isDragging = true;
-  seekToX(e.touches[0].clientX);
-}, { passive: true });
-document.addEventListener('touchmove', e => {
-  if (isDragging) seekToX(e.touches[0].clientX);
-}, { passive: true });
-document.addEventListener('touchend', () => { isDragging = false; });
+  progressBar.addEventListener('pointermove', e => {
+    if (!isDragging) return;
+    seekToX(e.clientX);
+  });
+
+  progressBar.addEventListener('pointerup', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    seekToX(e.clientX);
+  });
+
+  progressBar.addEventListener('pointercancel', () => {
+    isDragging = false;
+  });
+}
 
 // ── Lightbox ─────────────────────────────────
 const lightbox = document.createElement('div');
