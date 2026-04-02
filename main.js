@@ -523,6 +523,8 @@ function seekToX(clientX) {
   const rect = progressBar.getBoundingClientRect();
   const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
   audio.currentTime = pct * audio.duration;
+  setProgress(pct * 100);
+  timeCurrent.textContent = formatTime(pct * audio.duration);
 }
 
 if (progressBar) {
