@@ -535,6 +535,9 @@ h2 {
   transition: opacity .2s;
 }
 .player-progress:hover .player-progress-thumb { opacity: 1; }
+@media (hover: none) {
+  .player-progress-thumb { opacity: 1; }
+}
 .player-times {
   display: flex;
   justify-content: space-between;
