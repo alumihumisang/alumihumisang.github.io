@@ -467,10 +467,13 @@ function setProgress(pct) {
   progressThumb.style.left  = pct + '%';
 }
 
-// 顯示總時長
-audio.addEventListener('loadedmetadata', () => {
-  timeTotal.textContent = formatTime(audio.duration);
-});
+// 顯示總時長（durationchange 作為 iOS 的 fallback）
+function updateDuration() {
+  if (audio.duration && isFinite(audio.duration))
+    timeTotal.textContent = formatTime(audio.duration);
+}
+audio.addEventListener('loadedmetadata', updateDuration);
+audio.addEventListener('durationchange', updateDuration);
 
 // 更新進度條
 audio.addEventListener('timeupdate', () => {
@@ -510,16 +513,29 @@ progressBar?.addEventListener('click', e => {
   audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
 });
 
-// 拖曳進度條
+// 拖曳進度條（滑鼠 + 觸控）
 let isDragging = false;
-progressBar?.addEventListener('mousedown', () => { isDragging = true; });
-document.addEventListener('mousemove', e => {
-  if (!isDragging || !audio.duration) return;
+
+function seekToX(clientX) {
+  if (!audio.duration) return;
   const rect = progressBar.getBoundingClientRect();
-  const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
   audio.currentTime = pct * audio.duration;
-});
+}
+
+progressBar?.addEventListener('mousedown', e => { isDragging = true; seekToX(e.clientX); });
+document.addEventListener('mousemove', e => { if (isDragging) seekToX(e.clientX); });
 document.addEventListener('mouseup', () => { isDragging = false; });
+
+// 觸控支援
+progressBar?.addEventListener('touchstart', e => {
+  isDragging = true;
+  seekToX(e.touches[0].clientX);
+}, { passive: true });
+document.addEventListener('touchmove', e => {
+  if (isDragging) seekToX(e.touches[0].clientX);
+}, { passive: true });
+document.addEventListener('touchend', () => { isDragging = false; });
 
 // ── Lightbox ─────────────────────────────────
 const lightbox = document.createElement('div');
