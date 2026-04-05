@@ -579,18 +579,17 @@ h2 {
   border-top: 1px solid var(--border);
   padding-top: 20px;
   color: var(--text-muted);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 2;
 }
 .lyrics-meta {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: .06em;
   opacity: .55;
   margin-bottom: 16px;
 }
 .lyrics-body p { margin-bottom: 20px; }
 .lyrics-hook {
-  font-style: italic;
   opacity: .75;
   letter-spacing: .08em;
 }
