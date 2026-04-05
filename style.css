@@ -436,8 +436,8 @@ h2 {
   display: grid;
   grid-template-columns: 230px 1fr;
   gap: 36px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(97, 78, 180, 0.18);
+  border: 1px solid rgba(157,143,255,.2);
   border-radius: 22px;
   padding: 30px;
   align-items: center;
