@@ -47,6 +47,7 @@ const translations = {
     'btn-listen':'▶ 立即收聽','btn-contact':'聯絡我們',
     'marquee':'最新單曲《春夏秋冬》上線',
     'player-title':'春夏秋冬',
+    'lyrics':'<p class="lyrics-meta">春夏秋冬｜作詞：翠斯特　作曲：夢已如來</p><div class="lyrics-body"><p>春夏秋冬輪轉的時節<br />希望沒有人會受傷<br />付出就該等於收回<br />而且要讓人<br />感覺得到</p><p>春夏秋冬都一樣的傷人<br />月缺的直接　日落的慚愧<br />那些無法醒來的早晨<br />最恐怖的是<br />總會過去</p><p class="lyrics-hook">我不知道　不知道　不知道</p><p>春夏秋冬都一樣的傷人<br />無聊的驚喜　驚喜的愚昧<br />我以為我早就了解<br />否則如何成為<br />你的同類</p><p class="lyrics-hook">我不知道　不知道　不知道</p></div>',
     'sec-music':'MUSIC','h-music':'最新單曲','btn-dl':'↓ 下載 MP3',
     'sec-about':'ABOUT','h-about':'關於我們',
     'sec-gallery':'GALLERY','h-gallery':'影像',
