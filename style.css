@@ -487,6 +487,7 @@ h2 {
 
 .player-meta { margin-bottom: 22px; }
 .player-artist {
+  display: none;
   font-size: 11px;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -578,7 +579,7 @@ h2 {
   margin: 20px 0 4px;
   border-top: 1px solid var(--border);
   padding-top: 20px;
-  color: var(--text-muted);
+  color: var(--fg);
   font-size: 15px;
   line-height: 2;
 }
