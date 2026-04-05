@@ -577,8 +577,7 @@ h2 {
 
 .player-lyrics {
   margin: 20px 0 4px;
-  border-top: 1px solid var(--border);
-  padding-top: 20px;
+  padding-top: 4px;
   color: var(--fg);
   font-size: 15px;
   line-height: 2;
