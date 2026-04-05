@@ -68,6 +68,7 @@ const translations = {
     'nav-merch':'Merch','sec-merch':'MERCH','h-merch':'Handmade Mini',
     'sec-contact':'CONTACT','h-contact':'Contact / Booking',
     'about-body':'You say life is a play — I say the dream is already here.<br />You ask if electricity stands still or moves — I say electricity is a child.<br />Did the dream come? Has it not come yet?<br />Either way, we\'re still here, fooling around.<br />The moment closest to the electron —<br />is it the afterimage of a dream,<br />or have I simply become someone\'s aunt?<br />The band is still here. The mono synth is still searching for its satellite.',
+    'lyrics':'<p class="lyrics-meta">Seasons｜Lyrics: Triste　Music: 夢已如來</p><div class="lyrics-body"><p>Seasons turning<br />Hoping no one gets hurt along the way<br />What we give should find its way back<br />And somehow let it<br />be truly felt</p><p>Seasons turning — all the same, they hurt<br />A broken moon, a sunset full of shame<br />Those mornings we can\'t wake from<br />The scariest part is<br />it all just fades away</p><p class="lyrics-hook">I don\'t know, I don\'t know, I don\'t know</p><p>Seasons turning — all the same, they hurt<br />Boring surprises, surprising foolishness<br />I thought I understood it long ago<br />Otherwise how could I<br />fade into someone like you</p><p class="lyrics-hook">I don\'t know, I don\'t know, I don\'t know</p></div>',
     'eyebrow':"Dream Don't Come or Go",
   },
   ja: {
@@ -81,6 +82,7 @@ const translations = {
     'nav-merch':'グッズ','sec-merch':'MERCH','h-merch':'ミニ手作り',
     'sec-contact':'CONTACT','h-contact':'連絡 / ライブ依頼',
     'about-body':'君は「人生は芝居だ」と言う<br />僕は「夢はもう来ている」と言う<br /><br />君は「電は止まっているのか、動いているのか」と言う<br />僕は「電は子どもだ」と言う<br /><br />夢は来たのか　まだ来ていないのか<br />それでも僕らはここでふざけている<br /><br />電子にいちばん近づく瞬間<br />それは夢の残像なのか<br />それとも僕はもうおばさんなのか<br /><br />バンドはずっとここにいる<br />mono synth はまだ 自分の衛星を探している',
+    'lyrics':'<p class="lyrics-meta">めぐる季節｜作詞：翠斯特　作曲：夢已如來</p><div class="lyrics-body"><p>めぐる季節のなかで<br />誰も傷つかないようにと<br />願いながら<br /><br />与えたものは<br />どこかで返ってくると<br />信じていた<br />ただ　触れられるように</p><p>めぐる季節は　同じように痛みを残す<br />欠けた月と　沈んでいく光<br />目覚めきれない朝のなかで<br /><br />いちばん怖いのは<br />すべてが過ぎてしまうこと</p><p class="lyrics-hook">わからない<br />わからない<br />わからない</p><p>めぐる季節は　同じように痛みを残す<br />退屈な驚き　驚きのなかの愚かさ<br /><br />もうわかっていたはずなのに<br />そうでなければ<br /><br />どうして私は<br />あなたのように<br />溶けていけるの</p><p class="lyrics-hook">わからない<br />わからない<br />わからない</p></div>',
     'c-email':'メール','c-ig':'Instagram','c-yt':'YouTube',
     'eyebrow':"Dream Don't Come or Go",
   },
